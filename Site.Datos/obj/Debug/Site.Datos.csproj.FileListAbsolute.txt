@@ -1,0 +1,30 @@
+C:\Users\DELL\Desktop\Site\Site.Datos\bin\Debug\Site.Datos.dll.config
+C:\Users\DELL\Desktop\Site\Site.Datos\bin\Debug\Site.Datos.dll
+C:\Users\DELL\Desktop\Site\Site.Datos\bin\Debug\Site.Datos.pdb
+C:\Users\DELL\Desktop\Site\Site.Datos\bin\Debug\EntityFramework.dll
+C:\Users\DELL\Desktop\Site\Site.Datos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DELL\Desktop\Site\Site.Datos\bin\Debug\EntityFramework.xml
+C:\Users\DELL\Desktop\Site\Site.Datos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DELL\Desktop\Site\Site.Datos\obj\Debug\Site.Datos.csprojResolveAssemblyReference.cache
+C:\Users\DELL\Desktop\Site\Site.Datos\obj\Debug\Site.Datos.dll
+C:\Users\DELL\Desktop\Site\Site.Datos\obj\Debug\Site.Datos.pdb
+C:\Users\DELL\Desktop\Sites\Site.Datos\bin\Debug\Site.Datos.dll.config
+C:\Users\DELL\Desktop\Sites\Site.Datos\bin\Debug\Site.Datos.dll
+C:\Users\DELL\Desktop\Sites\Site.Datos\bin\Debug\Site.Datos.pdb
+C:\Users\DELL\Desktop\Sites\Site.Datos\bin\Debug\EntityFramework.dll
+C:\Users\DELL\Desktop\Sites\Site.Datos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DELL\Desktop\Sites\Site.Datos\bin\Debug\EntityFramework.xml
+C:\Users\DELL\Desktop\Sites\Site.Datos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DELL\Desktop\Sites\Site.Datos\obj\Debug\Site.Datos.csprojResolveAssemblyReference.cache
+C:\Users\DELL\Desktop\Sites\Site.Datos\obj\Debug\Site.Datos.dll
+C:\Users\DELL\Desktop\Sites\Site.Datos\obj\Debug\Site.Datos.pdb
+C:\Users\DELL\Desktop\Sites - melon\Site.Datos\bin\Debug\Site.Datos.dll.config
+C:\Users\DELL\Desktop\Sites - melon\Site.Datos\bin\Debug\Site.Datos.dll
+C:\Users\DELL\Desktop\Sites - melon\Site.Datos\bin\Debug\Site.Datos.pdb
+C:\Users\DELL\Desktop\Sites - melon\Site.Datos\bin\Debug\EntityFramework.dll
+C:\Users\DELL\Desktop\Sites - melon\Site.Datos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DELL\Desktop\Sites - melon\Site.Datos\bin\Debug\EntityFramework.xml
+C:\Users\DELL\Desktop\Sites - melon\Site.Datos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DELL\Desktop\Sites - melon\Site.Datos\obj\Debug\Site.Datos.csprojResolveAssemblyReference.cache
+C:\Users\DELL\Desktop\Sites - melon\Site.Datos\obj\Debug\Site.Datos.dll
+C:\Users\DELL\Desktop\Sites - melon\Site.Datos\obj\Debug\Site.Datos.pdb
