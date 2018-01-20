@@ -21,6 +21,7 @@ $(document).ready(function () {
             $url,
             function (res) {
                 $("#ContentPage").html(res);
+                alertas.hide();
             }, 'html'
 
         );
