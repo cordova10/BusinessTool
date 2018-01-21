@@ -138,7 +138,7 @@ function reloadModalBinding() {
 }
 
 function bindForm(dialog) {
-    //$.validator.unobtrusive.parse($('form', dialog)); //validar formulario
+    $.validator.unobtrusive.parse($('form', dialog)); //validar formulario
     $('form', dialog).submit(function () {
         //if ($(this).valid()) {
             $.ajax({
