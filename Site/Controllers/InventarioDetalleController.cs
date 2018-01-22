@@ -21,6 +21,7 @@ namespace Site.Controllers
         {
             inv_trans inv_trans = db.inv_trans.Find(id);
             ViewBag.Titulo = inv_trans.tra_comentario;
+            ViewBag.IdTrans = inv_trans.tra_id;
             return View();
         }
 
@@ -35,7 +36,7 @@ namespace Site.Controllers
                                  .OrderByDescending(x => x.tde_id)
                                  .Skip((page - 1) * pageSize).Take(pageSize)
                                  .ToList(); ;
-            model.Total = db.inv_trans_detalle.Include(i => i.inv_producto).Include(i => i.inv_trans).Include(i => i.inv_ubicacion).Count();
+            model.Total = db.inv_trans_detalle.Include(i => i.inv_producto).Count();
 
             modelo = new Models.GenericVM<inv_trans_detalle>
             {
@@ -62,8 +63,9 @@ namespace Site.Controllers
         }
 
         // GET: InventarioDetalle/Create
-        public ActionResult Create()
+        public ActionResult Create(string idTrans)
         {
+            ViewBag.idTrans = idTrans;
             ViewBag.tde_producto = new SelectList(db.inv_producto, "pro_id", "pro_codigo");
             ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario");
             ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo");
@@ -81,7 +83,9 @@ namespace Site.Controllers
             {
                 try
                 {
+
                     inv_trans_detalle.tde_fecha_trans = DateTime.Now;
+                    inv_trans_detalle.tde_descripcion = db.inv_producto.Find(inv_trans_detalle.tde_producto).pro_descripcion;
                     db.inv_trans_detalle.Add(inv_trans_detalle);
                     db.SaveChanges();
                     db.SaveChanges();
