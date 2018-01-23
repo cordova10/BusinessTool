@@ -59,12 +59,20 @@ namespace Site.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.inv_trans.Add(inv_trans);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    db.inv_trans.Add(inv_trans);
+                    db.SaveChanges();
+                    return Json(new { success = true, url = "InventarioDetalle/Index/" + inv_trans.tra_id.ToString() });
+                }
+                catch (Exception ex)
+                {
+                    //string error = Utils.HandlerError(ex);
+                    ModelState.AddModelError(string.Empty, ex.Message);
 
-            return View(inv_trans);
+                }
+            }
+            return PartialView("Create", inv_trans);
         }
 
         // GET: InventarioEntrada/Edit/5
@@ -79,7 +87,7 @@ namespace Site.Controllers
             {
                 return HttpNotFound();
             }
-            return View(inv_trans);
+            return PartialView(inv_trans);
         }
 
         // POST: InventarioEntrada/Edit/5
@@ -91,11 +99,21 @@ namespace Site.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(inv_trans).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(inv_trans).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true });
+                }
+                catch (Exception ex)
+                {
+                    //string error = Utils.HandlerError(ex);
+                    ModelState.AddModelError(string.Empty, ex.Message);
+
+                }
             }
-            return View(inv_trans);
+
+            return PartialView("Edit", inv_trans);
         }
 
         // GET: InventarioEntrada/Delete/5
@@ -110,7 +128,7 @@ namespace Site.Controllers
             {
                 return HttpNotFound();
             }
-            return View(inv_trans);
+            return PartialView("Delete", inv_trans);
         }
 
         // POST: InventarioEntrada/Delete/5
@@ -119,25 +137,24 @@ namespace Site.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             inv_trans inv_trans = db.inv_trans.Find(id);
-            db.inv_trans.Remove(inv_trans);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
+            try
+            {
+
+                db.inv_trans.Remove(inv_trans);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                //string error = Utils.HandlerError(ex);
+                ModelState.AddModelError(string.Empty, ex.Message);
+
+            }
+
+            return PartialView("Delete", inv_trans);
         }
 
-        // GET: InventarioEntrada/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            inv_trans inv_trans = db.inv_trans.Find(id);
-            if (inv_trans == null)
-            {
-                return HttpNotFound();
-            }
-            return View(inv_trans);
-        }
 
         protected override void Dispose(bool disposing)
         {

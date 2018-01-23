@@ -1,7 +1,7 @@
 ﻿@model Site.Datos.inv_trans
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "";
     Layout = null;
 }
 
@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         @Html.LabelFor(model => model.tra_fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.EditorFor(model => model.tra_fecha, new { htmlAttributes = new { @class = "form-control datepicker", @data_format = "D, dd MM yyyy" } })
+                        @Html.EditorFor(model => model.tra_fecha, new { htmlAttributes = new { @class = "form-control datepicker", @data_format = "dd/mm/yyyy" } })
                         @Html.ValidationMessageFor(model => model.tra_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -54,6 +54,8 @@
 <script>
     $(document).ready(function ()
     {
-        $(".datepicker").datepicker();
+        $(".datepicker").datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
     });
 </script>

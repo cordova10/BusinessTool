@@ -90,7 +90,7 @@ namespace Site.Controllers
                     ModelState.AddModelError(string.Empty, ex.Message);
 
                 }
-        }
+            }
 
             ViewBag.pro_tipo = new SelectList(db.inv_producto_tipo, "pti_id", "pti_descripcion", inv_producto.pro_tipo);
             ViewBag.pro_proveedor = new SelectList(db.inv_proveedor, "prv_id", "prv_nombre", inv_producto.pro_proveedor);

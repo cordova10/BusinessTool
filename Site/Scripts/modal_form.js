@@ -145,8 +145,13 @@ function bindForm(dialog) {
                 url: this.action,
                 type: this.method,
                 data: $(this).serialize(),
-                success: function (result) {
-                    if (result.success) {
+                success: function (result)
+                {
+                    if (result.success && result.url !== undefined) {
+                        $('#myModal').modal('hide');
+                        GotoUrl(result.url);
+                    }
+                    else if (result.success) {
                         $('#myModal').modal('hide');
                         $('#btnFilter').trigger("click", { hdnPage: $("#hdnCurrentPage").val() });
                         alertas.success("Operación realizada con éxito");
