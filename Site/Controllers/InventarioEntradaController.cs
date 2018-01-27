@@ -61,6 +61,10 @@ namespace Site.Controllers
             {
                 try
                 {
+                    inv_trans.tra_tipo = 1;
+                    inv_trans.tra_fecha_trans = DateTime.Now;
+                    inv_trans.tra_usuario_trans = 1;
+                    inv_trans.tra_eliminado = false;
                     db.inv_trans.Add(inv_trans);
                     db.SaveChanges();
                     return Json(new { success = true, url = "InventarioDetalle/Index/" + inv_trans.tra_id.ToString() });

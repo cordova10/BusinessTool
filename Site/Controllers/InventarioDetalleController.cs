@@ -74,6 +74,8 @@ namespace Site.Controllers
 
                     inv_trans_detalle.tde_fecha_trans = DateTime.Now;
                     inv_trans_detalle.tde_descripcion = db.inv_producto.Find(inv_trans_detalle.tde_producto).pro_descripcion;
+                    inv_trans_detalle.tde_usuario_trans = 1;
+                    inv_trans_detalle.tde_eliminado = false;
                     db.inv_trans_detalle.Add(inv_trans_detalle);
                     db.SaveChanges();
                     return Json(new { success = true });
