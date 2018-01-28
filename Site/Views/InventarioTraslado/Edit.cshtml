@@ -18,12 +18,16 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    @Html.ValidationSummary()
     <div class="modal-body">
 
       
 
         @Html.HiddenFor(model => model.producto.sto_id)
+        @Html.HiddenFor(model => model.producto.sto_ubicacion)
+        @Html.HiddenFor(model => model.producto.sto_cantidad)
+        @Html.HiddenFor(model => model.producto.sto_costo)
+        @Html.HiddenFor(model => model.producto.sto_producto)
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">

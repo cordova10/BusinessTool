@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Site.Datos;
 using Site.Models;
 using Site.Helpers;
+using Site.Utils;
 
 namespace Site.Controllers
 {
@@ -24,24 +25,28 @@ namespace Site.Controllers
 
         public PartialViewResult _List(int page = 1, int pageSize = 10, string filter = "")
         {
+
+            var modelo = GetModel(page, pageSize, filter);
+            return PartialView("_List", modelo);
+        }
+        private Models.GenericVM<inv_producto_stock> GetModel(int page = 1, int pageSize = 10, string filter = "")
+        {
             GenericResultElements<inv_producto_stock> model = new GenericResultElements<inv_producto_stock>();
             GenericVM<inv_producto_stock> modelo = new GenericVM<inv_producto_stock>() { };
 
 
             model.ListElements = db.inv_producto_stock.Include(i => i.inv_producto).Include(i => i.inv_ubicacion)
-                                 .OrderBy(x=>x.inv_producto.pro_codigo)
+                                 .OrderBy(x => x.inv_producto.pro_codigo)
                                  .Skip((page - 1) * pageSize).Take(pageSize)
                                  .ToList();
             model.Total = db.inv_producto_stock.Count();
 
-            modelo = new Models.GenericVM<inv_producto_stock>
+            return new Models.GenericVM<inv_producto_stock>
             {
                 filter = filter,
                 Lista = model.ListElements,
                 paging = new PagingInfo { CurrentPage = page, ItemsPerPage = pageSize, TotalItems = model.Total }
             };
-
-            return PartialView("_List", modelo);
         }
 
         // GET: Producto/Details/5
@@ -123,16 +128,59 @@ namespace Site.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "pro_id,pro_codigo,pro_descripcion,pro_unidad_medida,pro_tipo,pro_existencia_min,pro_existencia_max,pro_proveedor,pro_activo,pro_fecha_tran,pro_usuario_tran,pro_eliminado")] inv_producto inv_producto)
+        public ActionResult Edit(ProductoUbicacion obj)
         {
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    inv_producto.pro_fecha_tran = DateTime.Now.Date;
-                    db.Entry(inv_producto).State = EntityState.Modified;
+                    if (obj.cantidad_mover > obj.producto.sto_cantidad)
+                        throw new Exception("La cantidad a mover debe ser menor o igual a " + obj.producto.sto_cantidad);
+                    if (obj.ubicacion_mover == obj.producto.sto_ubicacion)
+                        throw new Exception("La ubicacion debe de ser distinta a la actual");
+
+                    //creo la salida del prducto y registro la entrada del mismo
+                    inv_trans objSalida = new inv_trans()
+                    {
+                        tra_fecha = DateTime.Now,
+                        tra_tipo = Constantes.SALIDA,
+                        tra_usuario = User.Identity.Name                         
+                    };
+                    objSalida.inv_trans_detalle = new List<inv_trans_detalle>();
+                    objSalida.inv_trans_detalle.Add(new inv_trans_detalle {
+
+                        tde_cantidad = obj.cantidad_mover,
+                        tde_costo = obj.producto.sto_costo,
+                        tde_fecha_trans = DateTime.Now,
+                        tde_producto = obj.producto.sto_producto,
+                        tde_ubicacion = obj.ubicacion_mover
+                    });
+                    db.inv_trans.Add(objSalida);
+                    
+                    //entrada
+
+                    inv_trans objEntrada = new inv_trans()
+                    {
+                        tra_fecha = DateTime.Now,
+                        tra_tipo = Constantes.ENTRADA,
+                        tra_usuario = User.Identity.Name
+                    };
+                    objEntrada.inv_trans_detalle = new List<inv_trans_detalle>();
+                    objEntrada.inv_trans_detalle.Add(new inv_trans_detalle
+                    {
+
+                        tde_cantidad = obj.cantidad_mover,
+                        tde_costo = obj.producto.sto_costo,
+                        tde_fecha_trans = DateTime.Now,
+                        tde_producto = obj.producto.sto_producto,
+                        tde_ubicacion = obj.ubicacion_mover
+                    });
+                    db.inv_trans.Add(objEntrada);
                     db.SaveChanges();
-                    return Json(new { success = true });
+                    var modelo = GetModel(1, 10, "");
+                    string html = HTML.RenderViewToString(this.ControllerContext,"_List", modelo);
+                    return Json(new { success = true ,html=html});
                 }
                 catch (Exception ex)
                 {
@@ -141,10 +189,9 @@ namespace Site.Controllers
 
                 }
             }
-            ViewBag.pro_tipo = new SelectList(db.inv_producto_tipo, "pti_id", "pti_descripcion", inv_producto.pro_tipo);
-            ViewBag.pro_proveedor = new SelectList(db.inv_proveedor, "prv_id", "prv_nombre", inv_producto.pro_proveedor);
-            ViewBag.pro_unidad_medida = new SelectList(db.inv_unidad_medida, "uni_id", "uni_descripcion", inv_producto.pro_unidad_medida);
-            return PartialView("Create", inv_producto);
+           
+            ViewBag.listaUbicaciones = db.inv_ubicacion.Where(x => x.ubi_activo == true).ToList();
+            return View(obj);
         }
 
         // GET: Producto/Delete/5

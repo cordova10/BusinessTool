@@ -140,7 +140,7 @@ function reloadModalBinding() {
 function bindForm(dialog) {
     $.validator.unobtrusive.parse($('form', dialog)); //validar formulario
     $('form', dialog).submit(function () {
-        //if ($(this).valid()) {
+        if ($(this).valid()) {
             $.ajax({
                 url: this.action,
                 type: this.method,
@@ -150,6 +150,9 @@ function bindForm(dialog) {
                         $('#myModal').modal('hide');
                         $('#btnFilter').trigger("click", { hdnPage: $("#hdnCurrentPage").val() });
                         alertas.success("Operación realizada con éxito");
+                        //si es satisfactorio y viene un html entonces lo inserto en el div,
+                        if(result.html)
+                             $("#ajaxDetails").html(result.html);
                     } else {
                         $('#myModalContent').html(result);
                         alertas.erroresModelState();
@@ -161,6 +164,6 @@ function bindForm(dialog) {
                 }
             });
             return false;
-        //}
+        }
     });
 }

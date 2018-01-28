@@ -13,13 +13,13 @@
                        class="form-control dev-txt-filter input-width-xlarge" id="filter" style="margin-right:5px;"
                        data-original-title="Valor de busqueda" data-toggle="tooltip" data-placement="top"
                        data-url="@Url.Action("_List", new {filter=Model.filter,page=Model.paging.CurrentPage,pageSize=Model.paging.ItemsPerPage })" />
-                <button type="button" class="btn btn-primary dev-btn-filter" id="btnFilter"
+                <button type="button" class="btn btn-primary dev-filter-ajax" id="btnFilter"
                         data-url="@Url.Action("_List", new {filter=Model.filter,page=Model.paging.CurrentPage,pageSize=Model.paging.ItemsPerPage })"
                         data-target="#filter">
                     <i class="icon-filter icon-white"></i>Filtrar
                 </button>
-                <button type="button" class="btn dev-btn-filter"
-                        data-url="@Url.Action("_List", new {filter=Model.filter,page=Model.paging.CurrentPage,pageSize=Model.paging.ItemsPerPage })"
+                <button type="button" class="btn dev-filter-ajax"
+                        data-url="@Url.Action("_List", new {filter="",page=Model.paging.CurrentPage,pageSize=Model.paging.ItemsPerPage })"
                         data-target="#filter" data-clear>
                     <i class="icon-remove"></i>
                     Limpiar
