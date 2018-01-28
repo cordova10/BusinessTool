@@ -17,8 +17,7 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @Html.HiddenFor(model => model.tde_trans)
-
+        <input type="hidden" name="tde_trans" id="tde_trans" value="@ViewBag.idTrans" />
 
         <div class="row">
             <div class="col-md-12">

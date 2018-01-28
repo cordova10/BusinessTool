@@ -32,7 +32,7 @@ namespace Site.Controllers
                                  .OrderBy(x=>x.pro_codigo)
                                  .Skip((page - 1) * pageSize).Take(pageSize)
                                  .ToList();
-            model.Total = db.inv_producto.Include(i => i.inv_producto_tipo).Include(i => i.inv_proveedor).Include(i => i.inv_unidad_medida).Count();
+            model.Total = db.inv_producto.Include(i => i.inv_producto_tipo).Count();
 
             modelo = new Models.GenericVM<inv_producto>
             {
@@ -90,7 +90,7 @@ namespace Site.Controllers
                     ModelState.AddModelError(string.Empty, ex.Message);
 
                 }
-        }
+            }
 
             ViewBag.pro_tipo = new SelectList(db.inv_producto_tipo, "pti_id", "pti_descripcion", inv_producto.pro_tipo);
             ViewBag.pro_proveedor = new SelectList(db.inv_proveedor, "prv_id", "prv_nombre", inv_producto.pro_proveedor);

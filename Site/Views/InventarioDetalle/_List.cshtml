@@ -12,14 +12,14 @@
                 <input type="text" name="filter" value="@Model.filter"
                        class="form-control dev-txt-filter input-width-xlarge" id="filter" style="margin-right:5px;"
                        data-original-title="Valor de busqueda" data-toggle="tooltip" data-placement="top"
-                       data-url="@Url.Action("_List", new {filter=Model.filter,page=Model.paging.CurrentPage,pageSize=Model.paging.ItemsPerPage })" />
+                       data-url="@Url.Action("_List", new {filter=Model.filter,page=Model.paging.CurrentPage,pageSize=Model.paging.ItemsPerPage, id=Model.id })" />
                 <button type="button" class="btn btn-primary dev-btn-filter" id="btnFilter"
-                        data-url="@Url.Action("_List", new {filter=Model.filter,page=Model.paging.CurrentPage,pageSize=Model.paging.ItemsPerPage })"
+                        data-url="@Url.Action("_List", new {filter=Model.filter,page=Model.paging.CurrentPage,pageSize=Model.paging.ItemsPerPage, id=Model.id })"
                         data-target="#filter">
                     <i class="icon-filter icon-white"></i>Filtrar
                 </button>
                 <button type="button" class="btn dev-btn-filter"
-                        data-url="@Url.Action("_List", new {filter=Model.filter,page=Model.paging.CurrentPage,pageSize=Model.paging.ItemsPerPage })"
+                        data-url="@Url.Action("_List", new {filter=Model.filter,page=Model.paging.CurrentPage,pageSize=Model.paging.ItemsPerPage, id=Model.id })"
                         data-target="#filter" data-clear>
                     <i class="icon-remove"></i>
                     Limpiar
@@ -71,15 +71,29 @@
                 @Html.DisplayFor(modelItem => item.inv_ubicacion.ubi_codigo)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.tde_id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.tde_id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.tde_id })
+                @Html.ActionLink("Editar", "Edit", new { id = item.tde_id }, new { data_modal = "" }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.tde_id }, new { data_modal = "" })
             </td>
         </tr>
     }
 
 
 </table>
+
+<div class="dataTables_paginate paging_bootstrap">
+    <div class="row-fluid actions-toolbar">
+        <div class="actions-toolbar-inner">
+            @Html.Paginar(Model.paging, pag => Url.Action("_List", new
+       {
+           id = Model.id,
+           page = pag,
+           Model.filter,
+           pageSize = Model.paging.ItemsPerPage
+       }))
+        </div>
+    </div>
+</div>
+
 
 
 <script type="text/javascript">

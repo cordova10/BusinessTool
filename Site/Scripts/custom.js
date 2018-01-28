@@ -225,7 +225,6 @@ alertas = {
 		    type: 'success',
 		    timeout: 2000
 	    });
-        toastr.success(MSG, "Success");
     },
     error: function (MSG) {
 
@@ -278,6 +277,17 @@ function getDetails(url) {
             alertas.hide();
         }
     });
+}
+
+function GotoUrl(url) {
+    alertas.show();
+    $.post(
+        url,
+        function (res) {
+            $("#ContentPage").html(res);
+            alertas.hide();
+        }, 'html'
+    );
 }
 
 function setCalendar() {

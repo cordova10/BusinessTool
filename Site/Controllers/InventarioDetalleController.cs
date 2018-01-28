@@ -21,24 +21,27 @@ namespace Site.Controllers
         {
             inv_trans inv_trans = db.inv_trans.Find(id);
             ViewBag.Titulo = inv_trans.tra_comentario;
+            ViewBag.IdTrans = inv_trans.tra_id;
             return View();
         }
 
 
-        public PartialViewResult _List(int page = 1, int pageSize = 10, string filter = "")
+        public PartialViewResult _List(int id = 0, int page = 1, int pageSize = 10, string filter = "")
         {
             GenericResultElements<inv_trans_detalle> model = new GenericResultElements<inv_trans_detalle>();
             GenericVM<inv_trans_detalle> modelo = new GenericVM<inv_trans_detalle>() { };
 
 
             model.ListElements = db.inv_trans_detalle.Include(i => i.inv_producto).Include(i => i.inv_trans).Include(i => i.inv_ubicacion)
+                                 .Where(x => x.tde_trans == id )
                                  .OrderByDescending(x => x.tde_id)
                                  .Skip((page - 1) * pageSize).Take(pageSize)
                                  .ToList(); ;
-            model.Total = db.inv_trans_detalle.Include(i => i.inv_producto).Include(i => i.inv_trans).Include(i => i.inv_ubicacion).Count();
+            model.Total = db.inv_trans_detalle.Include(i => i.inv_producto).Count();
 
             modelo = new Models.GenericVM<inv_trans_detalle>
             {
+                id = id,
                 filter = filter,
                 Lista = model.ListElements,
                 paging = new PagingInfo { CurrentPage = page, ItemsPerPage = pageSize, TotalItems = model.Total }
@@ -46,24 +49,11 @@ namespace Site.Controllers
 
             return PartialView("_List", modelo);
         }
-        // GET: InventarioDetalle/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            inv_trans_detalle inv_trans_detalle = db.inv_trans_detalle.Find(id);
-            if (inv_trans_detalle == null)
-            {
-                return HttpNotFound();
-            }
-            return View(inv_trans_detalle);
-        }
 
         // GET: InventarioDetalle/Create
-        public ActionResult Create()
+        public ActionResult Create(string idTrans)
         {
+            ViewBag.idTrans = idTrans;
             ViewBag.tde_producto = new SelectList(db.inv_producto, "pro_id", "pro_codigo");
             ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario");
             ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo");
@@ -81,9 +71,12 @@ namespace Site.Controllers
             {
                 try
                 {
+
                     inv_trans_detalle.tde_fecha_trans = DateTime.Now;
+                    inv_trans_detalle.tde_descripcion = db.inv_producto.Find(inv_trans_detalle.tde_producto).pro_descripcion;
+                    inv_trans_detalle.tde_usuario_trans = 1;
+                    inv_trans_detalle.tde_eliminado = false;
                     db.inv_trans_detalle.Add(inv_trans_detalle);
-                    db.SaveChanges();
                     db.SaveChanges();
                     return Json(new { success = true });
                 }
@@ -128,14 +121,27 @@ namespace Site.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(inv_trans_detalle).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    inv_trans_detalle.tde_fecha_trans = DateTime.Now;
+                    inv_trans_detalle.tde_descripcion = db.inv_producto.Find(inv_trans_detalle.tde_producto).pro_descripcion;
+                    db.Entry(inv_trans_detalle).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true });
+                }
+                catch (Exception ex)
+                {
+                    //string error = Utils.HandlerError(ex);
+                    ModelState.AddModelError(string.Empty, ex.Message);
+
+                }
             }
+
             ViewBag.tde_producto = new SelectList(db.inv_producto, "pro_id", "pro_codigo", inv_trans_detalle.tde_producto);
             ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario", inv_trans_detalle.tde_trans);
             ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo", inv_trans_detalle.tde_ubicacion);
-            return View(inv_trans_detalle);
+
+            return PartialView("Edit", inv_trans_detalle);
         }
 
         // GET: InventarioDetalle/Delete/5
@@ -150,7 +156,7 @@ namespace Site.Controllers
             {
                 return HttpNotFound();
             }
-            return View(inv_trans_detalle);
+            return PartialView("Delete", inv_trans_detalle);
         }
 
         // POST: InventarioDetalle/Delete/5
@@ -159,9 +165,21 @@ namespace Site.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             inv_trans_detalle inv_trans_detalle = db.inv_trans_detalle.Find(id);
-            db.inv_trans_detalle.Remove(inv_trans_detalle);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
+            try
+            {
+                db.inv_trans_detalle.Remove(inv_trans_detalle);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                //string error = Utils.HandlerError(ex);
+                ModelState.AddModelError(string.Empty, ex.Message);
+
+            }
+
+            return PartialView("Delete", inv_trans_detalle);
         }
 
         protected override void Dispose(bool disposing)

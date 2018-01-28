@@ -84,7 +84,7 @@ namespace Site.Controllers
             {
                 try
                 {
-                    inv_producto.pro_fecha_tran = DateTime.Now.Date;
+                    inv_producto.pro_fecha_tran = DateTime.Now;
                     db.inv_producto.Add(inv_producto);
                     db.SaveChanges();
                     return Json(new { success = true });
