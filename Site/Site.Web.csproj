@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioDetalleController.cs" />
     <Compile Include="Controllers\InventarioEntradaController.cs" />
+    <Compile Include="Controllers\InventarioUbicacionesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\InventarioTrasladoController.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProductoUbicacion.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Constantes.cs" />
@@ -2359,6 +2361,9 @@
     <Content Include="Views\InventarioTraslado\Index.cshtml" />
     <Content Include="Views\InventarioTraslado\_List.cshtml" />
     <Content Include="Views\InventarioTraslado\Edit.cshtml" />
+    <Content Include="Views\InventarioUbicaciones\Edit.cshtml" />
+    <Content Include="Views\InventarioUbicaciones\_List.cshtml" />
+    <Content Include="Views\InventarioUbicaciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Site.Models;
+using Site.Datos;
+using System.Web.Security;
 
 namespace Site.Controllers
 {
@@ -17,6 +19,8 @@ namespace Site.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        private DBEntities db = new DBEntities();
 
         public AccountController()
         {
@@ -66,29 +70,26 @@ namespace Site.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(Usuario model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            var usr = db.adm_usuario.FirstOrDefault(x => x.usr_usuario == model.usuario && x.usr_password == model.contrasenia);
+
+            if (usr==null)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                ModelState.AddModelError(string.Empty, "Usuario y/o contrasenia invalido");
+                return View(model);
             }
+
+            model.id = usr.usr_id;
+            model.nombre = usr.usr_nombre;
+            FormsAuthentication.SetAuthCookie(model.usuario, true);
+            Session["usr"] = model;
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -387,12 +388,12 @@ namespace Site.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
+       
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -417,6 +418,7 @@ namespace Site.Controllers
                 {
                     _signInManager.Dispose();
                     _signInManager = null;
+                    db.Dispose();
                 }
             }
 
