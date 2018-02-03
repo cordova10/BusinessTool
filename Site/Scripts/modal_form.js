@@ -149,7 +149,8 @@ function bindForm(dialog) {
                 {
                     if (result.success && result.url !== undefined) {
                         $('#myModal').modal('hide');
-                        GotoUrl(result.url);
+                        setTimeout("GotoUrl('" + result.url + "')", 500);
+                        
                     }
                     else if (result.success) {
                         $('#myModal').modal('hide');

@@ -1,6 +1,6 @@
 ﻿@using Site.Datos;
 @using Site.Helpers;
-@model Site.Models.GenericVM<inv_trans>
+@model Site.Models.GenericVM<inv_producto_stock>
 
 <div class="form-inline actions-toolbar">
     <div class="actions-toolbar-inner">
@@ -32,37 +32,45 @@
 
 <br />
 
+
 <table class="table table-striped table-bordered table-hover table-checkable table-responsive datatable">
     <tr>
         <th>
-            Fecha
+            Ubicacion
         </th>
         <th>
-            Comentario
+            Codigo
         </th>
         <th>
-            Usuario
+            Producto
         </th>
-        <th></th>
+        <th>
+            Cantidad
+        </th>
+        <th>
+            Costo
+        </th>
     </tr>
 
     @foreach (var item in Model.Lista)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.tra_fecha)
+                @Html.DisplayFor(modelItem => item.inv_ubicacion.ubi_codigo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.tra_comentario)
+                @Html.DisplayFor(modelItem => item.inv_producto.pro_codigo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.tra_usuario)
+                @Html.DisplayFor(modelItem => item.inv_producto.pro_descripcion)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.tra_id }, new { data_modal = "" }) |
-                @Html.ActionLink("Detalle", "Index","InventarioDetalle", new { id = item.tra_id }, new { @class="mnuOption" }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.tra_id }, new { data_modal = "" })
+                @Html.DisplayFor(modelItem => item.sto_cantidad)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sto_costo)
+            </td>
+            
         </tr>
     }
 
@@ -80,12 +88,3 @@
         </div>
     </div>
 </div>
-
-
-<script type="text/javascript">
-    $(document).ready(function ()
-    {
-        reloadModalBinding();
-    });
-</script>
-

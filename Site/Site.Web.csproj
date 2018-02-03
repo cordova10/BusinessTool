@@ -171,6 +171,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioDetalleController.cs" />
     <Compile Include="Controllers\InventarioEntradaController.cs" />
+    <Compile Include="Controllers\InventarioSalDetalleController.cs" />
+    <Compile Include="Controllers\InventarioSalidaController.cs" />
+    <Compile Include="Controllers\InventarioStockController.cs" />
     <Compile Include="Controllers\InventarioUbicacionesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PageController.cs" />
@@ -184,6 +187,8 @@
     <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Helpers\PagingInfo.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\cmbProducto.cs" />
+    <Compile Include="Models\cmbStock.cs" />
     <Compile Include="Models\GenericResultElements.cs" />
     <Compile Include="Models\GenericVM.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -2280,6 +2285,7 @@
     <Content Include="plugins\upload\package.json" />
     <Content Include="plugins\upload\README.md" />
     <Content Include="plugins\upload\sass\fileinput.scss" />
+    <None Include="Properties\PublishProfiles\Site.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -2365,6 +2371,24 @@
     <Content Include="Views\InventarioUbicaciones\Edit.cshtml" />
     <Content Include="Views\InventarioUbicaciones\_List.cshtml" />
     <Content Include="Views\InventarioUbicaciones\Index.cshtml" />
+    <Content Include="Views\InventarioStock\Create.cshtml" />
+    <Content Include="Views\InventarioStock\Delete.cshtml" />
+    <Content Include="Views\InventarioStock\Details.cshtml" />
+    <Content Include="Views\InventarioStock\Edit.cshtml" />
+    <Content Include="Views\InventarioStock\Index.cshtml" />
+    <Content Include="Views\InventarioStock\_List.cshtml" />
+    <Content Include="Views\InventarioSalida\Create.cshtml" />
+    <Content Include="Views\InventarioSalida\Delete.cshtml" />
+    <Content Include="Views\InventarioSalida\Details.cshtml" />
+    <Content Include="Views\InventarioSalida\Edit.cshtml" />
+    <Content Include="Views\InventarioSalida\Index.cshtml" />
+    <Content Include="Views\InventarioSalida\_List.cshtml" />
+    <Content Include="Views\InventarioSalDetalle\Create.cshtml" />
+    <Content Include="Views\InventarioSalDetalle\Delete.cshtml" />
+    <Content Include="Views\InventarioSalDetalle\Details.cshtml" />
+    <Content Include="Views\InventarioSalDetalle\Edit.cshtml" />
+    <Content Include="Views\InventarioSalDetalle\Index.cshtml" />
+    <Content Include="Views\InventarioSalDetalle\_List.cshtml" />
     <Content Include="Views\InventarioUbicaciones\Delete.cshtml" />
     <Content Include="Views\InventarioUbicaciones\Create.cshtml" />
   </ItemGroup>

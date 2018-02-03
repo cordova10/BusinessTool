@@ -60,7 +60,7 @@
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.tra_id }, new { data_modal = "" }) |
-                @Html.ActionLink("Detalle", "Index","InventarioDetalle", new { id = item.tra_id }, new { @class="mnuOption" }) |
+                @Html.ActionLink("Detalle", "Index", "InventarioSalDetalle", new { id = item.tra_id }, new { @class = "mnuOption" }) |
                 @Html.ActionLink("Eliminar", "Delete", new { id = item.tra_id }, new { data_modal = "" })
             </td>
         </tr>
@@ -81,11 +81,11 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
     $(document).ready(function ()
     {
         reloadModalBinding();
     });
 </script>
+
 

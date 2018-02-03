@@ -14,7 +14,7 @@ using System.Web.Security;
 
 namespace Site.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
