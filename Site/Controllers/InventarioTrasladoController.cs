@@ -154,7 +154,8 @@ namespace Site.Controllers
                         tde_costo = obj.producto.sto_costo,
                         tde_fecha_trans = DateTime.Now,
                         tde_producto = obj.producto.sto_producto,
-                        tde_ubicacion = obj.ubicacion_mover
+                        tde_ubicacion = obj.ubicacion_mover,
+                        tde_usuario_trans = ((Usuario)Session["usr"]).id
                     });
                     db.inv_trans.Add(objSalida);
                     
@@ -174,7 +175,8 @@ namespace Site.Controllers
                         tde_costo = obj.producto.sto_costo,
                         tde_fecha_trans = DateTime.Now,
                         tde_producto = obj.producto.sto_producto,
-                        tde_ubicacion = obj.ubicacion_mover
+                        tde_ubicacion = obj.ubicacion_mover,
+                        tde_usuario_trans = ((Usuario)Session["usr"]).id
                     });
                     db.inv_trans.Add(objEntrada);
                     db.SaveChanges();

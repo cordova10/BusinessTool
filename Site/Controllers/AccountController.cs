@@ -389,7 +389,7 @@ namespace Site.Controllers
         //
         // POST: /Account/LogOff
        
-        [ValidateAntiForgeryToken]
+       
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();

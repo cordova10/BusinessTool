@@ -183,6 +183,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AuthAttribute.cs" />
     <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Helpers\PagingInfo.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2388,6 +2389,8 @@
     <Content Include="Views\InventarioSalDetalle\Edit.cshtml" />
     <Content Include="Views\InventarioSalDetalle\Index.cshtml" />
     <Content Include="Views\InventarioSalDetalle\_List.cshtml" />
+    <Content Include="Views\InventarioUbicaciones\Delete.cshtml" />
+    <Content Include="Views\InventarioUbicaciones\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

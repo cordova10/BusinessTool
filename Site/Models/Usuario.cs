@@ -15,7 +15,7 @@ namespace Site.Models
 
         public List<string> opciones { get; set; }
 
-        public long id { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
 
     }
