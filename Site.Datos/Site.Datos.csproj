@@ -58,10 +58,40 @@
     <Compile Include="fac_cliente.cs">
       <DependentUpon>ModelSite.tt</DependentUpon>
     </Compile>
+    <Compile Include="fac_cxc.cs">
+      <DependentUpon>ModelSite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fac_cxc_detalle.cs">
+      <DependentUpon>ModelSite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fac_factura.cs">
+      <DependentUpon>ModelSite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fac_factura_detalle.cs">
+      <DependentUpon>ModelSite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fac_pedido.cs">
+      <DependentUpon>ModelSite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fac_pedido_detalle.cs">
+      <DependentUpon>ModelSite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fac_pedido_estado.cs">
+      <DependentUpon>ModelSite.tt</DependentUpon>
+    </Compile>
     <Compile Include="fac_precio.cs">
       <DependentUpon>ModelSite.tt</DependentUpon>
     </Compile>
     <Compile Include="fac_precio_detalle.cs">
+      <DependentUpon>ModelSite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fac_tipo_factura.cs">
+      <DependentUpon>ModelSite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fac_tipo_pago.cs">
+      <DependentUpon>ModelSite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fac_vendedor.cs">
       <DependentUpon>ModelSite.tt</DependentUpon>
     </Compile>
     <Compile Include="inv_despacho.cs">
@@ -112,17 +142,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="ModelSite.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelSite.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="ModelSite.edmx.diagram">
       <DependentUpon>ModelSite.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ModelSite.Context.tt">
@@ -135,9 +166,6 @@
       <DependentUpon>ModelSite.edmx</DependentUpon>
       <LastGenOutput>ModelSite.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

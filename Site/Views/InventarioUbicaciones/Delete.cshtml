@@ -9,7 +9,7 @@
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title">Editar Ubicacion</h4>
+    <h4 class="modal-title">Eliminar Ubicacion</h4>
 </div>
 
 @using (Html.BeginForm())
@@ -21,7 +21,8 @@
       
 
         @Html.HiddenFor(model => model.ubi_id)
-       
+       @Html.HiddenFor(model => model.ubi_fecha_tran)
+        @Html.HiddenFor(model => model.ubi_usuario_tran)
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -60,7 +61,7 @@
 
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-info">Guardar Cambios</button>
+        <button type="submit" class="btn btn-info">Guardar</button>
     </div>
 }
 

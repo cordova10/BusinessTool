@@ -1,198 +1,340 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
-    <EntitySetMapping Name="fac_cliente">
-      <EntityTypeMapping TypeName="DBModel.fac_cliente">
-        <MappingFragment StoreEntitySet="fac_cliente">
-          <ScalarProperty Name="cli_eliminado" ColumnName="cli_eliminado" />
-          <ScalarProperty Name="cli_usuario_tran" ColumnName="cli_usuario_tran" />
-          <ScalarProperty Name="cli_fecha_tran" ColumnName="cli_fecha_tran" />
-          <ScalarProperty Name="cli_activo" ColumnName="cli_activo" />
-          <ScalarProperty Name="cli_telefono" ColumnName="cli_telefono" />
-          <ScalarProperty Name="cli_no_registro" ColumnName="cli_no_registro" />
-          <ScalarProperty Name="cli_direccion" ColumnName="cli_direccion" />
-          <ScalarProperty Name="cli_nombres" ColumnName="cli_nombres" />
-          <ScalarProperty Name="cli_id" ColumnName="cli_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="inv_despacho">
-      <EntityTypeMapping TypeName="DBModel.inv_despacho">
-        <MappingFragment StoreEntitySet="inv_despacho">
-          <ScalarProperty Name="des_eliminado" ColumnName="des_eliminado" />
-          <ScalarProperty Name="des_usuario_tran" ColumnName="des_usuario_tran" />
-          <ScalarProperty Name="des_fecha_tran" ColumnName="des_fecha_tran" />
-          <ScalarProperty Name="des_comentario" ColumnName="des_comentario" />
-          <ScalarProperty Name="des_aplicado" ColumnName="des_aplicado" />
-          <ScalarProperty Name="des_direccion" ColumnName="des_direccion" />
-          <ScalarProperty Name="des_cliente" ColumnName="des_cliente" />
-          <ScalarProperty Name="des_fecha" ColumnName="des_fecha" />
-          <ScalarProperty Name="des_factura" ColumnName="des_factura" />
-          <ScalarProperty Name="des_id" ColumnName="des_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="inv_despacho_detalle">
-      <EntityTypeMapping TypeName="DBModel.inv_despacho_detalle">
-        <MappingFragment StoreEntitySet="inv_despacho_detalle">
-          <ScalarProperty Name="ddt_eliminado" ColumnName="ddt_eliminado" />
-          <ScalarProperty Name="ddt_usuario_tran" ColumnName="ddt_usuario_tran" />
-          <ScalarProperty Name="ddt_fecha_tran" ColumnName="ddt_fecha_tran" />
-          <ScalarProperty Name="ddt_ubicacion" ColumnName="ddt_ubicacion" />
-          <ScalarProperty Name="ddt_costo" ColumnName="ddt_costo" />
-          <ScalarProperty Name="ddt_descripcion" ColumnName="ddt_descripcion" />
-          <ScalarProperty Name="ddt_producto" ColumnName="ddt_producto" />
-          <ScalarProperty Name="ddt_cantidad" ColumnName="ddt_cantidad" />
-          <ScalarProperty Name="ddt_despacho" ColumnName="ddt_despacho" />
-          <ScalarProperty Name="ddt_id" ColumnName="ddt_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="inv_producto">
-      <EntityTypeMapping TypeName="DBModel.inv_producto">
-        <MappingFragment StoreEntitySet="inv_producto">
-          <ScalarProperty Name="pro_eliminado" ColumnName="pro_eliminado" />
-          <ScalarProperty Name="pro_usuario_tran" ColumnName="pro_usuario_tran" />
-          <ScalarProperty Name="pro_fecha_tran" ColumnName="pro_fecha_tran" />
-          <ScalarProperty Name="pro_activo" ColumnName="pro_activo" />
-          <ScalarProperty Name="pro_proveedor" ColumnName="pro_proveedor" />
-          <ScalarProperty Name="pro_existencia_max" ColumnName="pro_existencia_max" />
-          <ScalarProperty Name="pro_existencia_min" ColumnName="pro_existencia_min" />
-          <ScalarProperty Name="pro_tipo" ColumnName="pro_tipo" />
-          <ScalarProperty Name="pro_unidad_medida" ColumnName="pro_unidad_medida" />
-          <ScalarProperty Name="pro_descripcion" ColumnName="pro_descripcion" />
-          <ScalarProperty Name="pro_codigo" ColumnName="pro_codigo" />
-          <ScalarProperty Name="pro_id" ColumnName="pro_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="inv_producto_stock">
-      <EntityTypeMapping TypeName="DBModel.inv_producto_stock">
-        <MappingFragment StoreEntitySet="inv_producto_stock">
-          <ScalarProperty Name="sto_eliminado" ColumnName="sto_eliminado" />
-          <ScalarProperty Name="sto_usuario_tran" ColumnName="sto_usuario_tran" />
-          <ScalarProperty Name="sto_fecha_tran" ColumnName="sto_fecha_tran" />
-          <ScalarProperty Name="sto_costo" ColumnName="sto_costo" />
-          <ScalarProperty Name="sto_ubicacion" ColumnName="sto_ubicacion" />
-          <ScalarProperty Name="sto_producto" ColumnName="sto_producto" />
-          <ScalarProperty Name="sto_cantidad" ColumnName="sto_cantidad" />
-          <ScalarProperty Name="sto_id" ColumnName="sto_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="inv_producto_tipo">
-      <EntityTypeMapping TypeName="DBModel.inv_producto_tipo">
-        <MappingFragment StoreEntitySet="inv_producto_tipo">
-          <ScalarProperty Name="pti_eliminado" ColumnName="pti_eliminado" />
-          <ScalarProperty Name="pti_usuario_tran" ColumnName="pti_usuario_tran" />
-          <ScalarProperty Name="pti_fecha_tran" ColumnName="pti_fecha_tran" />
-          <ScalarProperty Name="pti_visible" ColumnName="pti_visible" />
-          <ScalarProperty Name="pti_descripcion" ColumnName="pti_descripcion" />
-          <ScalarProperty Name="pti_id" ColumnName="pti_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="inv_proveedor">
-      <EntityTypeMapping TypeName="DBModel.inv_proveedor">
-        <MappingFragment StoreEntitySet="inv_proveedor">
-          <ScalarProperty Name="prv_eliminado" ColumnName="prv_eliminado" />
-          <ScalarProperty Name="prv_usuario_trans" ColumnName="prv_usuario_trans" />
-          <ScalarProperty Name="prv_fecha_trans" ColumnName="prv_fecha_trans" />
-          <ScalarProperty Name="prv_telefono" ColumnName="prv_telefono" />
-          <ScalarProperty Name="prv_direccion" ColumnName="prv_direccion" />
-          <ScalarProperty Name="prv_nombre" ColumnName="prv_nombre" />
-          <ScalarProperty Name="prv_id" ColumnName="prv_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="inv_trans">
-      <EntityTypeMapping TypeName="DBModel.inv_trans">
-        <MappingFragment StoreEntitySet="inv_trans">
-          <ScalarProperty Name="tra_eliminado" ColumnName="tra_eliminado" />
-          <ScalarProperty Name="tra_usuario_trans" ColumnName="tra_usuario_trans" />
-          <ScalarProperty Name="tra_fecha_trans" ColumnName="tra_fecha_trans" />
-          <ScalarProperty Name="tra_comentario" ColumnName="tra_comentario" />
-          <ScalarProperty Name="tra_tipo" ColumnName="tra_tipo" />
-          <ScalarProperty Name="tra_usuario" ColumnName="tra_usuario" />
-          <ScalarProperty Name="tra_fecha" ColumnName="tra_fecha" />
-          <ScalarProperty Name="tra_id" ColumnName="tra_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="inv_trans_detalle">
-      <EntityTypeMapping TypeName="DBModel.inv_trans_detalle">
-        <MappingFragment StoreEntitySet="inv_trans_detalle">
-          <ScalarProperty Name="tde_eliminado" ColumnName="tde_eliminado" />
-          <ScalarProperty Name="tde_usuario_trans" ColumnName="tde_usuario_trans" />
-          <ScalarProperty Name="tde_fecha_trans" ColumnName="tde_fecha_trans" />
-          <ScalarProperty Name="tde_ubicacion" ColumnName="tde_ubicacion" />
-          <ScalarProperty Name="tde_costo" ColumnName="tde_costo" />
-          <ScalarProperty Name="tde_descripcion" ColumnName="tde_descripcion" />
-          <ScalarProperty Name="tde_producto" ColumnName="tde_producto" />
-          <ScalarProperty Name="tde_cantidad" ColumnName="tde_cantidad" />
-          <ScalarProperty Name="tde_trans" ColumnName="tde_trans" />
-          <ScalarProperty Name="tde_id" ColumnName="tde_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="inv_ubicacion">
-      <EntityTypeMapping TypeName="DBModel.inv_ubicacion">
-        <MappingFragment StoreEntitySet="inv_ubicacion">
-          <ScalarProperty Name="ubi_eliminado" ColumnName="ubi_eliminado" />
-          <ScalarProperty Name="ubi_usuario_tran" ColumnName="ubi_usuario_tran" />
-          <ScalarProperty Name="ubi_fecha_tran" ColumnName="ubi_fecha_tran" />
-          <ScalarProperty Name="ubi_activo" ColumnName="ubi_activo" />
-          <ScalarProperty Name="ubi_descripcion" ColumnName="ubi_descripcion" />
-          <ScalarProperty Name="ubi_codigo" ColumnName="ubi_codigo" />
-          <ScalarProperty Name="ubi_id" ColumnName="ubi_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="inv_unidad_medida">
-      <EntityTypeMapping TypeName="DBModel.inv_unidad_medida">
-        <MappingFragment StoreEntitySet="inv_unidad_medida">
-          <ScalarProperty Name="ubi_eliminado" ColumnName="ubi_eliminado" />
-          <ScalarProperty Name="ubi_usuario_tran" ColumnName="ubi_usuario_tran" />
-          <ScalarProperty Name="uni_fecha_tran" ColumnName="uni_fecha_tran" />
-          <ScalarProperty Name="uni_descripcion" ColumnName="uni_descripcion" />
-          <ScalarProperty Name="uni_id" ColumnName="uni_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+  <EntityContainerMapping StorageEntityContainer="business_dbModelStoreContainer" CdmEntityContainer="business_dbEntities">
     <EntitySetMapping Name="adm_usuario">
-      <EntityTypeMapping TypeName="DBModel.adm_usuario">
+      <EntityTypeMapping TypeName="business_dbModel.adm_usuario">
         <MappingFragment StoreEntitySet="adm_usuario">
-          <ScalarProperty Name="usr_eliminado" ColumnName="usr_eliminado" />
-          <ScalarProperty Name="usr_usuario_tran" ColumnName="usr_usuario_tran" />
-          <ScalarProperty Name="usr_fecha_tran" ColumnName="usr_fecha_tran" />
-          <ScalarProperty Name="usr_nombre" ColumnName="usr_nombre" />
-          <ScalarProperty Name="usr_password" ColumnName="usr_password" />
-          <ScalarProperty Name="usr_usuario" ColumnName="usr_usuario" />
           <ScalarProperty Name="usr_id" ColumnName="usr_id" />
+          <ScalarProperty Name="usr_usuario" ColumnName="usr_usuario" />
+          <ScalarProperty Name="usr_password" ColumnName="usr_password" />
+          <ScalarProperty Name="usr_nombre" ColumnName="usr_nombre" />
+          <ScalarProperty Name="usr_fecha_tran" ColumnName="usr_fecha_tran" />
+          <ScalarProperty Name="usr_usuario_tran" ColumnName="usr_usuario_tran" />
+          <ScalarProperty Name="usr_eliminado" ColumnName="usr_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_cliente">
+      <EntityTypeMapping TypeName="business_dbModel.fac_cliente">
+        <MappingFragment StoreEntitySet="fac_cliente">
+          <ScalarProperty Name="cli_id" ColumnName="cli_id" />
+          <ScalarProperty Name="cli_nombres" ColumnName="cli_nombres" />
+          <ScalarProperty Name="cli_direccion" ColumnName="cli_direccion" />
+          <ScalarProperty Name="cli_no_registro" ColumnName="cli_no_registro" />
+          <ScalarProperty Name="cli_telefono" ColumnName="cli_telefono" />
+          <ScalarProperty Name="cli_activo" ColumnName="cli_activo" />
+          <ScalarProperty Name="cli_fecha_tran" ColumnName="cli_fecha_tran" />
+          <ScalarProperty Name="cli_usuario_tran" ColumnName="cli_usuario_tran" />
+          <ScalarProperty Name="cli_eliminado" ColumnName="cli_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_cxc">
+      <EntityTypeMapping TypeName="business_dbModel.fac_cxc">
+        <MappingFragment StoreEntitySet="fac_cxc">
+          <ScalarProperty Name="cxc_id" ColumnName="cxc_id" />
+          <ScalarProperty Name="cxc_fecha" ColumnName="cxc_fecha" />
+          <ScalarProperty Name="cxc_factura" ColumnName="cxc_factura" />
+          <ScalarProperty Name="cxc_cliente" ColumnName="cxc_cliente" />
+          <ScalarProperty Name="cxc_monto" ColumnName="cxc_monto" />
+          <ScalarProperty Name="cxc_dias_credito" ColumnName="cxc_dias_credito" />
+          <ScalarProperty Name="cxc_fecha_trans" ColumnName="cxc_fecha_trans" />
+          <ScalarProperty Name="cxc_usuario_trans" ColumnName="cxc_usuario_trans" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_cxc_detalle">
+      <EntityTypeMapping TypeName="business_dbModel.fac_cxc_detalle">
+        <MappingFragment StoreEntitySet="fac_cxc_detalle">
+          <ScalarProperty Name="cde_id" ColumnName="cde_id" />
+          <ScalarProperty Name="cde_cuenta" ColumnName="cde_cuenta" />
+          <ScalarProperty Name="cde_fecha" ColumnName="cde_fecha" />
+          <ScalarProperty Name="cde_abono" ColumnName="cde_abono" />
+          <ScalarProperty Name="cde_no_documento" ColumnName="cde_no_documento" />
+          <ScalarProperty Name="cde_fecha_tran" ColumnName="cde_fecha_tran" />
+          <ScalarProperty Name="cde_usuario_tran" ColumnName="cde_usuario_tran" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_factura">
+      <EntityTypeMapping TypeName="business_dbModel.fac_factura">
+        <MappingFragment StoreEntitySet="fac_factura">
+          <ScalarProperty Name="fac_id" ColumnName="fac_id" />
+          <ScalarProperty Name="fac_serie" ColumnName="fac_serie" />
+          <ScalarProperty Name="fac_tipo_factura" ColumnName="fac_tipo_factura" />
+          <ScalarProperty Name="fac_tipo_pago" ColumnName="fac_tipo_pago" />
+          <ScalarProperty Name="fac_caja" ColumnName="fac_caja" />
+          <ScalarProperty Name="fac_fecha" ColumnName="fac_fecha" />
+          <ScalarProperty Name="fac_numero" ColumnName="fac_numero" />
+          <ScalarProperty Name="fac_no_registro" ColumnName="fac_no_registro" />
+          <ScalarProperty Name="fac_cliente" ColumnName="fac_cliente" />
+          <ScalarProperty Name="fac_vendedor" ColumnName="fac_vendedor" />
+          <ScalarProperty Name="fac_monto" ColumnName="fac_monto" />
+          <ScalarProperty Name="fac_impuesto" ColumnName="fac_impuesto" />
+          <ScalarProperty Name="fac_total" ColumnName="fac_total" />
+          <ScalarProperty Name="fac_nota" ColumnName="fac_nota" />
+          <ScalarProperty Name="fac_eliminado" ColumnName="fac_eliminado" />
+          <ScalarProperty Name="fac_usuario_tran" ColumnName="fac_usuario_tran" />
+          <ScalarProperty Name="fac_fecha_tran" ColumnName="fac_fecha_tran" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_factura_detalle">
+      <EntityTypeMapping TypeName="business_dbModel.fac_factura_detalle">
+        <MappingFragment StoreEntitySet="fac_factura_detalle">
+          <ScalarProperty Name="fde_id" ColumnName="fde_id" />
+          <ScalarProperty Name="fde_factura" ColumnName="fde_factura" />
+          <ScalarProperty Name="fde_producto" ColumnName="fde_producto" />
+          <ScalarProperty Name="fde_descripcion" ColumnName="fde_descripcion" />
+          <ScalarProperty Name="fde_cantidad" ColumnName="fde_cantidad" />
+          <ScalarProperty Name="fde_unidad_medida" ColumnName="fde_unidad_medida" />
+          <ScalarProperty Name="fde_precio_unitario" ColumnName="fde_precio_unitario" />
+          <ScalarProperty Name="fde_descuento_porcen" ColumnName="fde_descuento_porcen" />
+          <ScalarProperty Name="fde_descuento_monto" ColumnName="fde_descuento_monto" />
+          <ScalarProperty Name="fde_costo" ColumnName="fde_costo" />
+          <ScalarProperty Name="fde_usuario_tran" ColumnName="fde_usuario_tran" />
+          <ScalarProperty Name="fde_fecha_tran" ColumnName="fde_fecha_tran" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_pedido">
+      <EntityTypeMapping TypeName="business_dbModel.fac_pedido">
+        <MappingFragment StoreEntitySet="fac_pedido">
+          <ScalarProperty Name="ped_id" ColumnName="ped_id" />
+          <ScalarProperty Name="ped_numero" ColumnName="ped_numero" />
+          <ScalarProperty Name="ped_fecha" ColumnName="ped_fecha" />
+          <ScalarProperty Name="ped_cliente" ColumnName="ped_cliente" />
+          <ScalarProperty Name="ped_vendedor" ColumnName="ped_vendedor" />
+          <ScalarProperty Name="ped_estado" ColumnName="ped_estado" />
+          <ScalarProperty Name="ped_factura" ColumnName="ped_factura" />
+          <ScalarProperty Name="ped_eliminado" ColumnName="ped_eliminado" />
+          <ScalarProperty Name="ped_usuario_tran" ColumnName="ped_usuario_tran" />
+          <ScalarProperty Name="ped_fecha_tran" ColumnName="ped_fecha_tran" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_pedido_detalle">
+      <EntityTypeMapping TypeName="business_dbModel.fac_pedido_detalle">
+        <MappingFragment StoreEntitySet="fac_pedido_detalle">
+          <ScalarProperty Name="pde_id" ColumnName="pde_id" />
+          <ScalarProperty Name="pde_pedido" ColumnName="pde_pedido" />
+          <ScalarProperty Name="pde_cantidad" ColumnName="pde_cantidad" />
+          <ScalarProperty Name="pde_producto" ColumnName="pde_producto" />
+          <ScalarProperty Name="pde_precio_uni" ColumnName="pde_precio_uni" />
+          <ScalarProperty Name="pde_descuento_porcen" ColumnName="pde_descuento_porcen" />
+          <ScalarProperty Name="fde_descuento_monto" ColumnName="fde_descuento_monto" />
+          <ScalarProperty Name="pde_costo" ColumnName="pde_costo" />
+          <ScalarProperty Name="pde_eliminado" ColumnName="pde_eliminado" />
+          <ScalarProperty Name="pde_usuario_tran" ColumnName="pde_usuario_tran" />
+          <ScalarProperty Name="pde_fecha_tran" ColumnName="pde_fecha_tran" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_pedido_estado">
+      <EntityTypeMapping TypeName="business_dbModel.fac_pedido_estado">
+        <MappingFragment StoreEntitySet="fac_pedido_estado">
+          <ScalarProperty Name="pes_id" ColumnName="pes_id" />
+          <ScalarProperty Name="pes_estado" ColumnName="pes_estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="fac_precio">
-      <EntityTypeMapping TypeName="DBModel.fac_precio">
+      <EntityTypeMapping TypeName="business_dbModel.fac_precio">
         <MappingFragment StoreEntitySet="fac_precio">
-          <ScalarProperty Name="pre_usuario_tran" ColumnName="pre_usuario_tran" />
-          <ScalarProperty Name="pre_fecha_tran" ColumnName="pre_fecha_tran" />
-          <ScalarProperty Name="pre_activo" ColumnName="pre_activo" />
-          <ScalarProperty Name="pre_descripcion" ColumnName="pre_descripcion" />
           <ScalarProperty Name="pre_id" ColumnName="pre_id" />
+          <ScalarProperty Name="pre_descripcion" ColumnName="pre_descripcion" />
+          <ScalarProperty Name="pre_activo" ColumnName="pre_activo" />
+          <ScalarProperty Name="pre_fecha_tran" ColumnName="pre_fecha_tran" />
+          <ScalarProperty Name="pre_usuario_tran" ColumnName="pre_usuario_tran" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="fac_precio_detalle">
-      <EntityTypeMapping TypeName="DBModel.fac_precio_detalle">
+      <EntityTypeMapping TypeName="business_dbModel.fac_precio_detalle">
         <MappingFragment StoreEntitySet="fac_precio_detalle">
-          <ScalarProperty Name="pde_usuario_tran" ColumnName="pde_usuario_tran" />
-          <ScalarProperty Name="pde_fecha_tran" ColumnName="pde_fecha_tran" />
-          <ScalarProperty Name="pde_activo" ColumnName="pde_activo" />
-          <ScalarProperty Name="pde_valor" ColumnName="pde_valor" />
-          <ScalarProperty Name="pde_producto" ColumnName="pde_producto" />
-          <ScalarProperty Name="pde_precio" ColumnName="pde_precio" />
           <ScalarProperty Name="pde_id" ColumnName="pde_id" />
+          <ScalarProperty Name="pde_precio" ColumnName="pde_precio" />
+          <ScalarProperty Name="pde_producto" ColumnName="pde_producto" />
+          <ScalarProperty Name="pde_valor" ColumnName="pde_valor" />
+          <ScalarProperty Name="pde_activo" ColumnName="pde_activo" />
+          <ScalarProperty Name="pde_fecha_tran" ColumnName="pde_fecha_tran" />
+          <ScalarProperty Name="pde_usuario_tran" ColumnName="pde_usuario_tran" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_tipo_factura">
+      <EntityTypeMapping TypeName="business_dbModel.fac_tipo_factura">
+        <MappingFragment StoreEntitySet="fac_tipo_factura">
+          <ScalarProperty Name="tfa_id" ColumnName="tfa_id" />
+          <ScalarProperty Name="tfa_tipo_factura" ColumnName="tfa_tipo_factura" />
+          <ScalarProperty Name="tfa_eliminado" ColumnName="tfa_eliminado" />
+          <ScalarProperty Name="tfa_usuario_tran" ColumnName="tfa_usuario_tran" />
+          <ScalarProperty Name="tfa_fecha_tran" ColumnName="tfa_fecha_tran" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_tipo_pago">
+      <EntityTypeMapping TypeName="business_dbModel.fac_tipo_pago">
+        <MappingFragment StoreEntitySet="fac_tipo_pago">
+          <ScalarProperty Name="tpa_id" ColumnName="tpa_id" />
+          <ScalarProperty Name="tpa_tipo_pago" ColumnName="tpa_tipo_pago" />
+          <ScalarProperty Name="tpa_num_dias" ColumnName="tpa_num_dias" />
+          <ScalarProperty Name="tpa_eliminado" ColumnName="tpa_eliminado" />
+          <ScalarProperty Name="tpa_usuario_tran" ColumnName="tpa_usuario_tran" />
+          <ScalarProperty Name="tpa_fecha_tran" ColumnName="tpa_fecha_tran" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fac_vendedor">
+      <EntityTypeMapping TypeName="business_dbModel.fac_vendedor">
+        <MappingFragment StoreEntitySet="fac_vendedor">
+          <ScalarProperty Name="ven_id" ColumnName="ven_id" />
+          <ScalarProperty Name="ven_codigo" ColumnName="ven_codigo" />
+          <ScalarProperty Name="ven_nombre" ColumnName="ven_nombre" />
+          <ScalarProperty Name="ven_activo" ColumnName="ven_activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_despacho">
+      <EntityTypeMapping TypeName="business_dbModel.inv_despacho">
+        <MappingFragment StoreEntitySet="inv_despacho">
+          <ScalarProperty Name="des_id" ColumnName="des_id" />
+          <ScalarProperty Name="des_factura" ColumnName="des_factura" />
+          <ScalarProperty Name="des_fecha" ColumnName="des_fecha" />
+          <ScalarProperty Name="des_cliente" ColumnName="des_cliente" />
+          <ScalarProperty Name="des_direccion" ColumnName="des_direccion" />
+          <ScalarProperty Name="des_aplicado" ColumnName="des_aplicado" />
+          <ScalarProperty Name="des_comentario" ColumnName="des_comentario" />
+          <ScalarProperty Name="des_fecha_tran" ColumnName="des_fecha_tran" />
+          <ScalarProperty Name="des_usuario_tran" ColumnName="des_usuario_tran" />
+          <ScalarProperty Name="des_eliminado" ColumnName="des_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_despacho_detalle">
+      <EntityTypeMapping TypeName="business_dbModel.inv_despacho_detalle">
+        <MappingFragment StoreEntitySet="inv_despacho_detalle">
+          <ScalarProperty Name="ddt_id" ColumnName="ddt_id" />
+          <ScalarProperty Name="ddt_despacho" ColumnName="ddt_despacho" />
+          <ScalarProperty Name="ddt_cantidad" ColumnName="ddt_cantidad" />
+          <ScalarProperty Name="ddt_producto" ColumnName="ddt_producto" />
+          <ScalarProperty Name="ddt_descripcion" ColumnName="ddt_descripcion" />
+          <ScalarProperty Name="ddt_costo" ColumnName="ddt_costo" />
+          <ScalarProperty Name="ddt_ubicacion" ColumnName="ddt_ubicacion" />
+          <ScalarProperty Name="ddt_fecha_tran" ColumnName="ddt_fecha_tran" />
+          <ScalarProperty Name="ddt_usuario_tran" ColumnName="ddt_usuario_tran" />
+          <ScalarProperty Name="ddt_eliminado" ColumnName="ddt_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_producto">
+      <EntityTypeMapping TypeName="business_dbModel.inv_producto">
+        <MappingFragment StoreEntitySet="inv_producto">
+          <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+          <ScalarProperty Name="pro_codigo" ColumnName="pro_codigo" />
+          <ScalarProperty Name="pro_descripcion" ColumnName="pro_descripcion" />
+          <ScalarProperty Name="pro_unidad_medida" ColumnName="pro_unidad_medida" />
+          <ScalarProperty Name="pro_tipo" ColumnName="pro_tipo" />
+          <ScalarProperty Name="pro_existencia_min" ColumnName="pro_existencia_min" />
+          <ScalarProperty Name="pro_existencia_max" ColumnName="pro_existencia_max" />
+          <ScalarProperty Name="pro_proveedor" ColumnName="pro_proveedor" />
+          <ScalarProperty Name="pro_activo" ColumnName="pro_activo" />
+          <ScalarProperty Name="pro_fecha_tran" ColumnName="pro_fecha_tran" />
+          <ScalarProperty Name="pro_usuario_tran" ColumnName="pro_usuario_tran" />
+          <ScalarProperty Name="pro_eliminado" ColumnName="pro_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_producto_stock">
+      <EntityTypeMapping TypeName="business_dbModel.inv_producto_stock">
+        <MappingFragment StoreEntitySet="inv_producto_stock">
+          <ScalarProperty Name="sto_id" ColumnName="sto_id" />
+          <ScalarProperty Name="sto_cantidad" ColumnName="sto_cantidad" />
+          <ScalarProperty Name="sto_producto" ColumnName="sto_producto" />
+          <ScalarProperty Name="sto_ubicacion" ColumnName="sto_ubicacion" />
+          <ScalarProperty Name="sto_costo" ColumnName="sto_costo" />
+          <ScalarProperty Name="sto_fecha_tran" ColumnName="sto_fecha_tran" />
+          <ScalarProperty Name="sto_usuario_tran" ColumnName="sto_usuario_tran" />
+          <ScalarProperty Name="sto_eliminado" ColumnName="sto_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_producto_tipo">
+      <EntityTypeMapping TypeName="business_dbModel.inv_producto_tipo">
+        <MappingFragment StoreEntitySet="inv_producto_tipo">
+          <ScalarProperty Name="pti_id" ColumnName="pti_id" />
+          <ScalarProperty Name="pti_descripcion" ColumnName="pti_descripcion" />
+          <ScalarProperty Name="pti_visible" ColumnName="pti_visible" />
+          <ScalarProperty Name="pti_fecha_tran" ColumnName="pti_fecha_tran" />
+          <ScalarProperty Name="pti_usuario_tran" ColumnName="pti_usuario_tran" />
+          <ScalarProperty Name="pti_eliminado" ColumnName="pti_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_proveedor">
+      <EntityTypeMapping TypeName="business_dbModel.inv_proveedor">
+        <MappingFragment StoreEntitySet="inv_proveedor">
+          <ScalarProperty Name="prv_id" ColumnName="prv_id" />
+          <ScalarProperty Name="prv_nombre" ColumnName="prv_nombre" />
+          <ScalarProperty Name="prv_direccion" ColumnName="prv_direccion" />
+          <ScalarProperty Name="prv_telefono" ColumnName="prv_telefono" />
+          <ScalarProperty Name="prv_fecha_trans" ColumnName="prv_fecha_trans" />
+          <ScalarProperty Name="prv_usuario_trans" ColumnName="prv_usuario_trans" />
+          <ScalarProperty Name="prv_eliminado" ColumnName="prv_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_trans">
+      <EntityTypeMapping TypeName="business_dbModel.inv_trans">
+        <MappingFragment StoreEntitySet="inv_trans">
+          <ScalarProperty Name="tra_id" ColumnName="tra_id" />
+          <ScalarProperty Name="tra_fecha" ColumnName="tra_fecha" />
+          <ScalarProperty Name="tra_usuario" ColumnName="tra_usuario" />
+          <ScalarProperty Name="tra_tipo" ColumnName="tra_tipo" />
+          <ScalarProperty Name="tra_comentario" ColumnName="tra_comentario" />
+          <ScalarProperty Name="tra_fecha_trans" ColumnName="tra_fecha_trans" />
+          <ScalarProperty Name="tra_usuario_trans" ColumnName="tra_usuario_trans" />
+          <ScalarProperty Name="tra_eliminado" ColumnName="tra_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_trans_detalle">
+      <EntityTypeMapping TypeName="business_dbModel.inv_trans_detalle">
+        <MappingFragment StoreEntitySet="inv_trans_detalle">
+          <ScalarProperty Name="tde_id" ColumnName="tde_id" />
+          <ScalarProperty Name="tde_trans" ColumnName="tde_trans" />
+          <ScalarProperty Name="tde_cantidad" ColumnName="tde_cantidad" />
+          <ScalarProperty Name="tde_producto" ColumnName="tde_producto" />
+          <ScalarProperty Name="tde_descripcion" ColumnName="tde_descripcion" />
+          <ScalarProperty Name="tde_costo" ColumnName="tde_costo" />
+          <ScalarProperty Name="tde_ubicacion" ColumnName="tde_ubicacion" />
+          <ScalarProperty Name="tde_fecha_trans" ColumnName="tde_fecha_trans" />
+          <ScalarProperty Name="tde_usuario_trans" ColumnName="tde_usuario_trans" />
+          <ScalarProperty Name="tde_eliminado" ColumnName="tde_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_ubicacion">
+      <EntityTypeMapping TypeName="business_dbModel.inv_ubicacion">
+        <MappingFragment StoreEntitySet="inv_ubicacion">
+          <ScalarProperty Name="ubi_id" ColumnName="ubi_id" />
+          <ScalarProperty Name="ubi_codigo" ColumnName="ubi_codigo" />
+          <ScalarProperty Name="ubi_descripcion" ColumnName="ubi_descripcion" />
+          <ScalarProperty Name="ubi_activo" ColumnName="ubi_activo" />
+          <ScalarProperty Name="ubi_fecha_tran" ColumnName="ubi_fecha_tran" />
+          <ScalarProperty Name="ubi_usuario_tran" ColumnName="ubi_usuario_tran" />
+          <ScalarProperty Name="ubi_eliminado" ColumnName="ubi_eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_unidad_medida">
+      <EntityTypeMapping TypeName="business_dbModel.inv_unidad_medida">
+        <MappingFragment StoreEntitySet="inv_unidad_medida">
+          <ScalarProperty Name="uni_id" ColumnName="uni_id" />
+          <ScalarProperty Name="uni_descripcion" ColumnName="uni_descripcion" />
+          <ScalarProperty Name="uni_fecha_tran" ColumnName="uni_fecha_tran" />
+          <ScalarProperty Name="ubi_usuario_tran" ColumnName="ubi_usuario_tran" />
+          <ScalarProperty Name="ubi_eliminado" ColumnName="ubi_eliminado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

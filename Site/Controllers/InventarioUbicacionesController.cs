@@ -8,10 +8,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Data.Entity;
 namespace Site.Controllers
 {
-    [Authorize()]
+   
     public class InventarioUbicacionesController : Controller
     {
         private DBEntities db = new DBEntities();
@@ -35,6 +35,7 @@ namespace Site.Controllers
 
 
             model.ListElements = db.inv_ubicacion
+                                 .Include(x=>x.adm_usuario)
                                  .OrderBy(x => x.ubi_codigo)
                                  .Skip((page - 1) * pageSize).Take(pageSize)
                                  .ToList();
@@ -66,9 +67,7 @@ namespace Site.Controllers
         // GET: Producto/Create
         public ActionResult Create()
         {
-            ViewBag.pro_tipo = new SelectList(db.inv_producto_tipo, "pti_id", "pti_descripcion");
-            ViewBag.pro_proveedor = new SelectList(db.inv_proveedor, "prv_id", "prv_nombre");
-            ViewBag.pro_unidad_medida = new SelectList(db.inv_unidad_medida, "uni_id", "uni_descripcion");
+           
             return View();
         }
 
@@ -77,16 +76,20 @@ namespace Site.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "pro_id,pro_codigo,pro_descripcion,pro_unidad_medida,pro_tipo,pro_existencia_min,pro_existencia_max,pro_proveedor,pro_activo,pro_fecha_tran,pro_usuario_tran,pro_eliminado")] inv_producto inv_producto)
+        public ActionResult Create(inv_ubicacion obj)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    inv_producto.pro_fecha_tran = DateTime.Now;
-                    db.inv_producto.Add(inv_producto);
+                    obj.ubi_fecha_tran = DateTime.Now;
+                    obj.ubi_usuario_tran = ((Usuario)Session["usr"]).id;
+                    
+                    db.inv_ubicacion.Add(obj);
                     db.SaveChanges();
-                    return Json(new { success = true });
+                    var modelo = GetModel(1, 10, "");
+                    string html = HTML.RenderViewToString(this.ControllerContext, "_List", modelo);
+                    return Json(new { success = true, html = html });
                 }
                 catch (Exception ex)
                 {
@@ -96,10 +99,7 @@ namespace Site.Controllers
                 }
             }
 
-            ViewBag.pro_tipo = new SelectList(db.inv_producto_tipo, "pti_id", "pti_descripcion", inv_producto.pro_tipo);
-            ViewBag.pro_proveedor = new SelectList(db.inv_proveedor, "prv_id", "prv_nombre", inv_producto.pro_proveedor);
-            ViewBag.pro_unidad_medida = new SelectList(db.inv_unidad_medida, "uni_id", "uni_descripcion", inv_producto.pro_unidad_medida);
-            return PartialView("Create", inv_producto);
+            return View(obj);
         }
 
         // GET: Producto/Edit/5
@@ -131,8 +131,10 @@ namespace Site.Controllers
             {
                 try
                 {
+                    obj.ubi_fecha_tran = DateTime.Now;
+                    obj.ubi_usuario_tran = ((Usuario)Session["usr"]).id;
                     
-                    db.inv_ubicacion.Add(obj);
+                    db.inv_ubicacion.Attach(obj);
                     db.SaveChanges();
                     var modelo = GetModel(1, 10, "");
                     string html = HTML.RenderViewToString(this.ControllerContext, "_List", modelo);
@@ -157,36 +159,47 @@ namespace Site.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            inv_producto inv_producto = db.inv_producto.Find(id);
-            if (inv_producto == null)
+            inv_ubicacion objUbicacion = db.inv_ubicacion.FirstOrDefault(x => x.ubi_id == id.Value);
+            if (objUbicacion == null)
             {
                 return HttpNotFound();
             }
-            return PartialView("Delete", inv_producto);
+
+
+            return View(objUbicacion);
         }
 
         // POST: Producto/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(inv_ubicacion obj)
         {
 
-            inv_producto inv_producto = db.inv_producto.Find(id);
-
-            try
+            if (ModelState.IsValid)
             {
-                db.inv_producto.Remove(inv_producto);
-                db.SaveChanges();
-                return Json(new { success = true });
-            }
-            catch (Exception ex)
-            {
-                //string error = Utils.HandlerError(ex);
-                ModelState.AddModelError(string.Empty, ex.Message);
+                try
+                {
+                    obj = db.inv_ubicacion.FirstOrDefault(x => x.ubi_id == obj.ubi_id);
+                    if(obj.inv_producto_stock.Count()>0 || obj.inv_trans_detalle.Count()>0)
+                    {
+                        ModelState.AddModelError(string.Empty, "No se puede eliminar porque tiene registros asociados");
+                        return View(obj);
+                    }
+                    db.inv_ubicacion.Remove(obj);
+                    db.SaveChanges();
+                    var modelo = GetModel(1, 10, "");
+                    string html = HTML.RenderViewToString(this.ControllerContext, "_List", modelo);
+                    return Json(new { success = true, html = html });
+                }
+                catch (Exception ex)
+                {
+                    //string error = Utils.HandlerError(ex);
+                    ModelState.AddModelError(string.Empty, ex.Message);
 
+                }
             }
-
-            return PartialView("Delete", inv_producto);
+          
+            return View(obj);
         }
 
         protected override void Dispose(bool disposing)

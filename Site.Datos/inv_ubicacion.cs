@@ -11,7 +11,7 @@ namespace Site.Datos
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations
     public partial class inv_ubicacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +22,7 @@ namespace Site.Datos
         }
     
         public int ubi_id { get; set; }
+        []
         public string ubi_codigo { get; set; }
         public string ubi_descripcion { get; set; }
         public bool ubi_activo { get; set; }
@@ -29,6 +30,7 @@ namespace Site.Datos
         public int ubi_usuario_tran { get; set; }
         public bool ubi_eliminado { get; set; }
     
+        public virtual adm_usuario adm_usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<inv_producto_stock> inv_producto_stock { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
