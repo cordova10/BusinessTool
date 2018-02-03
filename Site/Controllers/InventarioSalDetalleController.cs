@@ -12,11 +12,11 @@ using Site.Helpers;
 
 namespace Site.Controllers
 {
-    public class InventarioDetalleController : Controller
+    public class InventarioSalDetalleController : Controller
     {
         private DBEntities db = new DBEntities();
 
-        // GET: InventarioDetalle
+        // GET: InventarioSalDetalle
         public ActionResult Index(int id = 0)
         {
             inv_trans inv_trans = db.inv_trans.Find(id);
@@ -33,7 +33,7 @@ namespace Site.Controllers
 
 
             model.ListElements = db.inv_trans_detalle.Include(i => i.inv_producto).Include(i => i.inv_trans).Include(i => i.inv_ubicacion)
-                                 .Where(x => x.tde_trans == id )
+                                 .Where(x => x.tde_trans == id)
                                  .OrderByDescending(x => x.tde_id)
                                  .Skip((page - 1) * pageSize).Take(pageSize)
                                  .ToList(); ;
@@ -50,21 +50,17 @@ namespace Site.Controllers
             return PartialView("_List", modelo);
         }
 
-        // GET: InventarioDetalle/Create
+        // GET: InventarioSalDetalle/Create
         public ActionResult Create(string idTrans)
         {
             ViewBag.idTrans = idTrans;
 
-            List<cmbProducto> inv_producto = new List<cmbProducto>();
-            inv_producto = db.inv_producto.Select(x => new cmbProducto{ pro_id = x.pro_id, pro_codigo = x.pro_codigo, pro_descripcion = x.pro_descripcion }).ToList();
+            LoadList();
 
-            ViewBag.tde_producto = new SelectList(inv_producto, "pro_id", "descripcion");
-            ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario");
-            ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo");
             return View();
         }
 
-        // POST: InventarioDetalle/Create
+        // POST: InventarioSalDetalle/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -75,9 +71,14 @@ namespace Site.Controllers
             {
                 try
                 {
+                    inv_producto_stock stock = new inv_producto_stock();
 
-                    inv_trans_detalle.tde_fecha_trans = DateTime.Now;
+                    stock = db.inv_producto_stock.Find(inv_trans_detalle.tde_ubicacion);
+
+                    inv_trans_detalle.tde_fecha_trans = DateTime.Now; 
                     inv_trans_detalle.tde_descripcion = db.inv_producto.Find(inv_trans_detalle.tde_producto).pro_descripcion;
+                    inv_trans_detalle.tde_costo = stock.sto_costo;
+                    inv_trans_detalle.tde_ubicacion = stock.sto_ubicacion;
                     inv_trans_detalle.tde_usuario_trans = 1;
                     inv_trans_detalle.tde_eliminado = false;
                     db.inv_trans_detalle.Add(inv_trans_detalle);
@@ -92,16 +93,11 @@ namespace Site.Controllers
                 }
             }
 
-            List<cmbProducto> inv_producto = new List<cmbProducto>();
-            inv_producto = db.inv_producto.Select(x => new cmbProducto { pro_id = x.pro_id, pro_codigo = x.pro_codigo, pro_descripcion = x.pro_descripcion }).ToList();
-
-            ViewBag.tde_producto = new SelectList(inv_producto, "pro_id", "descripcion");
-            ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario", inv_trans_detalle.tde_trans);
-            ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo", inv_trans_detalle.tde_ubicacion);
+            LoadList();
             return PartialView("Create", inv_trans_detalle);
         }
 
-        // GET: InventarioDetalle/Edit/5
+        // GET: InventarioSalDetalle/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,18 +110,13 @@ namespace Site.Controllers
                 return HttpNotFound();
             }
 
-            List<cmbProducto> inv_producto = new List<cmbProducto>();
-            inv_producto = db.inv_producto.Select(x => new cmbProducto { pro_id = x.pro_id, pro_codigo = x.pro_codigo, pro_descripcion = x.pro_descripcion }).ToList();
-
-            ViewBag.tde_producto = new SelectList(inv_producto, "pro_id", "descripcion");
-            ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario", inv_trans_detalle.tde_trans);
-            ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo", inv_trans_detalle.tde_ubicacion);
+            LoadList();
             ViewBag.idProducto = inv_trans_detalle.tde_producto;
             ViewBag.idUbicacion = inv_trans_detalle.tde_ubicacion;
             return View(inv_trans_detalle);
         }
 
-        // POST: InventarioDetalle/Edit/5
+        // POST: InventarioSalDetalle/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -136,8 +127,14 @@ namespace Site.Controllers
             {
                 try
                 {
+                    inv_producto_stock stock = new inv_producto_stock();
+
+                    stock = db.inv_producto_stock.Find(inv_trans_detalle.tde_ubicacion);
+
                     inv_trans_detalle.tde_fecha_trans = DateTime.Now;
                     inv_trans_detalle.tde_descripcion = db.inv_producto.Find(inv_trans_detalle.tde_producto).pro_descripcion;
+                    inv_trans_detalle.tde_costo = stock.sto_costo;
+                    inv_trans_detalle.tde_ubicacion = stock.sto_ubicacion;
                     inv_trans_detalle.tde_usuario_trans = 1;
                     inv_trans_detalle.tde_eliminado = false;
                     db.Entry(inv_trans_detalle).State = EntityState.Modified;
@@ -152,17 +149,12 @@ namespace Site.Controllers
                 }
             }
 
-            List<cmbProducto> inv_producto = new List<cmbProducto>();
-            inv_producto = db.inv_producto.Select(x => new cmbProducto { pro_id = x.pro_id, pro_codigo = x.pro_codigo, pro_descripcion = x.pro_descripcion }).ToList();
-
-            ViewBag.tde_producto = new SelectList(inv_producto, "pro_id", "descripcion");
-            ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario", inv_trans_detalle.tde_trans);
-            ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo", inv_trans_detalle.tde_ubicacion);
+            LoadList();
 
             return PartialView("Edit", inv_trans_detalle);
         }
 
-        // GET: InventarioDetalle/Delete/5
+        // GET: InventarioSalDetalle/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -177,7 +169,7 @@ namespace Site.Controllers
             return PartialView("Delete", inv_trans_detalle);
         }
 
-        // POST: InventarioDetalle/Delete/5
+        // POST: InventarioSalDetalle/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -198,6 +190,36 @@ namespace Site.Controllers
             }
 
             return PartialView("Delete", inv_trans_detalle);
+        }
+
+        public JsonResult GetStock(int id)
+        {
+
+            List<cmbStock> inv_stock = new List<cmbStock>();
+            inv_stock = db.inv_producto_stock.Include(i => i.inv_ubicacion)
+                        .Where(x => x.sto_producto == id)
+                        .Select(x => new cmbStock { sto_id = x.sto_id, sto_cantidad = x.sto_cantidad, ubi_codigo = x.inv_ubicacion.ubi_codigo, sto_costo = x.sto_costo }).ToList();
+
+            return new JsonResult { Data = inv_stock, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public void LoadList()
+        {
+
+            List<cmbProducto> inv_producto = new List<cmbProducto>();
+            inv_producto = db.inv_producto_stock.Include(i => i.inv_producto)
+                           .Select(x => new cmbProducto { pro_id = x.sto_producto, pro_codigo = x.inv_producto.pro_codigo, pro_descripcion = x.inv_producto.pro_descripcion }).ToList();
+
+            int id = inv_producto.FirstOrDefault().pro_id;
+
+            List<cmbStock> inv_stock = new List<cmbStock>();
+            inv_stock = db.inv_producto_stock.Include(i => i.inv_ubicacion)
+                        .Where(x => x.sto_producto == id)
+                        .Select(x => new cmbStock { sto_id = x.sto_id, sto_cantidad = x.sto_cantidad, ubi_codigo = x.inv_ubicacion.ubi_codigo, sto_costo = x.sto_costo }).ToList();
+
+            ViewBag.tde_producto = new SelectList(inv_producto, "pro_id", "descripcion");
+            ViewBag.tde_ubicacion = new SelectList(inv_stock, "sto_id", "descripcion");
+
         }
 
         protected override void Dispose(bool disposing)

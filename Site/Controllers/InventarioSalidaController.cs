@@ -106,7 +106,7 @@ namespace Site.Controllers
             {
                 try
                 {
-                    inv_trans.tra_tipo = 1;
+                    inv_trans.tra_tipo = 2;
                     inv_trans.tra_fecha_trans = DateTime.Now;
                     inv_trans.tra_usuario_trans = 1;
                     inv_trans.tra_eliminado = false;

@@ -68,6 +68,19 @@
 
 </table>
 
+<div class="dataTables_paginate paging_bootstrap">
+    <div class="row-fluid actions-toolbar">
+        <div class="actions-toolbar-inner">
+            @Html.Paginar(Model.paging, pag => Url.Action("_List", new
+       {
+           page = pag,
+           Model.filter,
+           pageSize = Model.paging.ItemsPerPage
+       }))
+        </div>
+    </div>
+</div>
+
 
 <script type="text/javascript">
     $(document).ready(function ()
