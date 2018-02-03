@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.pro_codigo, htmlAttributes: new { @class = "control-label" })
+                    Codigo
                     @Html.EditorFor(model => model.pro_codigo, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.pro_codigo, "", new { @class = "text-danger" })
                 </div>
@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.pro_descripcion, htmlAttributes: new { @class = "control-label" })
+                    Descripcion
                     @Html.EditorFor(model => model.pro_descripcion, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.pro_descripcion, "", new { @class = "text-danger" })
                 </div>
@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.pro_unidad_medida, "pro_unidad_medida", htmlAttributes: new { @class = "control-label" })
+                    Unidad Medida
                     @Html.DropDownList("pro_unidad_medida", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.pro_unidad_medida, "", new { @class = "text-danger" })
                 </div>
@@ -51,7 +51,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.pro_tipo, "pro_tipo", htmlAttributes: new { @class = "control-label" })
+                    Tipo
                     @Html.DropDownList("pro_tipo", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.pro_tipo, "", new { @class = "text-danger" })
                 </div>
@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.pro_proveedor, "pro_proveedor", htmlAttributes: new { @class = "control-label" })
+                    Proveedor
                     @Html.DropDownList("pro_proveedor", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.pro_proveedor, "", new { @class = "text-danger" })
                 </div>
@@ -71,7 +71,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.pro_existencia_min, htmlAttributes: new { @class = "control-label" })
+                    Existencia Min
                     @Html.EditorFor(model => model.pro_existencia_min, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.pro_existencia_min, "", new { @class = "text-danger" })
                 </div>
@@ -81,7 +81,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.pro_existencia_max, htmlAttributes: new { @class = "control-label" })
+                    Existencia Max
                     @Html.EditorFor(model => model.pro_existencia_max, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.pro_existencia_max, "", new { @class = "text-danger" })
                 </div>
@@ -91,7 +91,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.pro_activo, htmlAttributes: new { @class = "control-label" })
+                    Activo
                     <div class="checkbox">
                         @Html.EditorFor(model => model.pro_activo,  new { htmlAttributes = new { @class = "checkbox" } })
                         @Html.ValidationMessageFor(model => model.pro_activo, "", new { @class = "text-danger" })
