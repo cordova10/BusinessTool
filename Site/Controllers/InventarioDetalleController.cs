@@ -54,7 +54,11 @@ namespace Site.Controllers
         public ActionResult Create(string idTrans)
         {
             ViewBag.idTrans = idTrans;
-            ViewBag.tde_producto = new SelectList(db.inv_producto, "pro_id", "pro_codigo");
+
+            List<cmbProducto> inv_producto = new List<cmbProducto>();
+            inv_producto = db.inv_producto.Select(x => new cmbProducto{ pro_id = x.pro_id, pro_codigo = x.pro_codigo, pro_descripcion = x.pro_descripcion }).ToList();
+
+            ViewBag.tde_producto = new SelectList(inv_producto, "pro_id", "descripcion");
             ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario");
             ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo");
             return View();
@@ -88,7 +92,10 @@ namespace Site.Controllers
                 }
             }
 
-            ViewBag.tde_producto = new SelectList(db.inv_producto, "pro_id", "pro_codigo", inv_trans_detalle.tde_producto);
+            List<cmbProducto> inv_producto = new List<cmbProducto>();
+            inv_producto = db.inv_producto.Select(x => new cmbProducto { pro_id = x.pro_id, pro_codigo = x.pro_codigo, pro_descripcion = x.pro_descripcion }).ToList();
+
+            ViewBag.tde_producto = new SelectList(inv_producto, "pro_id", "descripcion");
             ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario", inv_trans_detalle.tde_trans);
             ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo", inv_trans_detalle.tde_ubicacion);
             return PartialView("Create", inv_trans_detalle);
@@ -106,7 +113,11 @@ namespace Site.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.tde_producto = new SelectList(db.inv_producto, "pro_id", "pro_codigo", inv_trans_detalle.tde_producto);
+
+            List<cmbProducto> inv_producto = new List<cmbProducto>();
+            inv_producto = db.inv_producto.Select(x => new cmbProducto { pro_id = x.pro_id, pro_codigo = x.pro_codigo, pro_descripcion = x.pro_descripcion }).ToList();
+
+            ViewBag.tde_producto = new SelectList(inv_producto, "pro_id", "descripcion");
             ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario", inv_trans_detalle.tde_trans);
             ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo", inv_trans_detalle.tde_ubicacion);
             return View(inv_trans_detalle);
@@ -137,7 +148,10 @@ namespace Site.Controllers
                 }
             }
 
-            ViewBag.tde_producto = new SelectList(db.inv_producto, "pro_id", "pro_codigo", inv_trans_detalle.tde_producto);
+            List<cmbProducto> inv_producto = new List<cmbProducto>();
+            inv_producto = db.inv_producto.Select(x => new cmbProducto { pro_id = x.pro_id, pro_codigo = x.pro_codigo, pro_descripcion = x.pro_descripcion }).ToList();
+
+            ViewBag.tde_producto = new SelectList(inv_producto, "pro_id", "descripcion");
             ViewBag.tde_trans = new SelectList(db.inv_trans, "tra_id", "tra_usuario", inv_trans_detalle.tde_trans);
             ViewBag.tde_ubicacion = new SelectList(db.inv_ubicacion, "ubi_id", "ubi_codigo", inv_trans_detalle.tde_ubicacion);
 

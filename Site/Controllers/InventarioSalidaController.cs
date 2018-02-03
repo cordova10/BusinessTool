@@ -12,11 +12,11 @@ using Site.Helpers;
 
 namespace Site.Controllers
 {
-    public class InventarioEntradaController : Controller
+    public class InventarioSalidaController : Controller
     {
         private DBEntities db = new DBEntities();
 
-        // GET: InventarioEntrada
+        // GET: InventarioSalida
         public ActionResult Index()
         {
             return View();
@@ -29,7 +29,7 @@ namespace Site.Controllers
 
 
             model.ListElements = db.inv_trans
-                                 .Where(x => x.tra_tipo == 1)
+                                 .Where(x => x.tra_tipo == 2)
                                  .OrderByDescending(x => x.tra_id)
                                  .Skip((page - 1) * pageSize).Take(pageSize)
                                  .ToList(); ;
@@ -45,13 +45,13 @@ namespace Site.Controllers
             return PartialView("_List", modelo);
         }
 
-        // GET: InventarioEntrada/Create
+        // GET: InventarioSalida/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: InventarioEntrada/Create
+        // POST: InventarioSalida/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -62,13 +62,13 @@ namespace Site.Controllers
             {
                 try
                 {
-                    inv_trans.tra_tipo = 1;
+                    inv_trans.tra_tipo = 2;
                     inv_trans.tra_fecha_trans = DateTime.Now;
                     inv_trans.tra_usuario_trans = 1;
                     inv_trans.tra_eliminado = false;
                     db.inv_trans.Add(inv_trans);
                     db.SaveChanges();
-                    return Json(new { success = true, url = "InventarioDetalle/Index/" + inv_trans.tra_id.ToString() });
+                    return Json(new { success = true, url = "InventarioSalDetalle/Index/" + inv_trans.tra_id.ToString() });
                 }
                 catch (Exception ex)
                 {
@@ -80,7 +80,7 @@ namespace Site.Controllers
             return PartialView("Create", inv_trans);
         }
 
-        // GET: InventarioEntrada/Edit/5
+        // GET: InventarioSalida/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,7 +95,7 @@ namespace Site.Controllers
             return PartialView(inv_trans);
         }
 
-        // POST: InventarioEntrada/Edit/5
+        // POST: InventarioSalida/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -125,7 +125,7 @@ namespace Site.Controllers
             return PartialView("Edit", inv_trans);
         }
 
-        // GET: InventarioEntrada/Delete/5
+        // GET: InventarioSalida/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -140,7 +140,7 @@ namespace Site.Controllers
             return PartialView("Delete", inv_trans);
         }
 
-        // POST: InventarioEntrada/Delete/5
+        // POST: InventarioSalida/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -163,7 +163,6 @@ namespace Site.Controllers
 
             return PartialView("Delete", inv_trans);
         }
-
 
         protected override void Dispose(bool disposing)
         {

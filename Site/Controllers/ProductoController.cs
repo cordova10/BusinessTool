@@ -32,7 +32,7 @@ namespace Site.Controllers
                                  .OrderBy(x=>x.pro_codigo)
                                  .Skip((page - 1) * pageSize).Take(pageSize)
                                  .ToList();
-            model.Total = db.inv_producto.Include(i => i.inv_producto_tipo).Count();
+            model.Total = db.inv_producto.Count();
 
             modelo = new Models.GenericVM<inv_producto>
             {
