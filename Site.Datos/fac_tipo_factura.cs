@@ -12,23 +12,21 @@ namespace Site.Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class adm_usuario
+    public partial class fac_tipo_factura
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public adm_usuario()
+        public fac_tipo_factura()
         {
-            this.inv_ubicacion = new HashSet<inv_ubicacion>();
+            this.fac_factura = new HashSet<fac_factura>();
         }
     
-        public int usr_id { get; set; }
-        public string usr_usuario { get; set; }
-        public string usr_password { get; set; }
-        public string usr_nombre { get; set; }
-        public System.DateTime usr_fecha_tran { get; set; }
-        public int usr_usuario_tran { get; set; }
-        public bool usr_eliminado { get; set; }
+        public int tfa_id { get; set; }
+        public string tfa_tipo_factura { get; set; }
+        public bool tfa_eliminado { get; set; }
+        public Nullable<int> tfa_usuario_tran { get; set; }
+        public Nullable<System.DateTime> tfa_fecha_tran { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<inv_ubicacion> inv_ubicacion { get; set; }
+        public virtual ICollection<fac_factura> fac_factura { get; set; }
     }
 }

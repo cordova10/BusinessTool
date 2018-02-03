@@ -1,67 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="fac_cliente" EntityType="DBModel.fac_cliente" />
-    <EntitySet Name="inv_despacho" EntityType="DBModel.inv_despacho" />
-    <EntitySet Name="inv_despacho_detalle" EntityType="DBModel.inv_despacho_detalle" />
-    <EntitySet Name="inv_producto" EntityType="DBModel.inv_producto" />
-    <EntitySet Name="inv_producto_stock" EntityType="DBModel.inv_producto_stock" />
-    <EntitySet Name="inv_producto_tipo" EntityType="DBModel.inv_producto_tipo" />
-    <EntitySet Name="inv_proveedor" EntityType="DBModel.inv_proveedor" />
-    <EntitySet Name="inv_trans" EntityType="DBModel.inv_trans" />
-    <EntitySet Name="inv_trans_detalle" EntityType="DBModel.inv_trans_detalle" />
-    <EntitySet Name="inv_ubicacion" EntityType="DBModel.inv_ubicacion" />
-    <EntitySet Name="inv_unidad_medida" EntityType="DBModel.inv_unidad_medida" />
-    <AssociationSet Name="FK_inv_despacho_detalle_inv_despacho" Association="DBModel.FK_inv_despacho_detalle_inv_despacho">
-      <End Role="inv_despacho" EntitySet="inv_despacho" />
-      <End Role="inv_despacho_detalle" EntitySet="inv_despacho_detalle" />
-    </AssociationSet>
-    <AssociationSet Name="FK_inv_producto_inv_producto_tipo" Association="DBModel.FK_inv_producto_inv_producto_tipo">
-      <End Role="inv_producto_tipo" EntitySet="inv_producto_tipo" />
-      <End Role="inv_producto" EntitySet="inv_producto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_inv_producto_inv_proveedor" Association="DBModel.FK_inv_producto_inv_proveedor">
-      <End Role="inv_proveedor" EntitySet="inv_proveedor" />
-      <End Role="inv_producto" EntitySet="inv_producto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_inv_producto_inv_unidad_medida" Association="DBModel.FK_inv_producto_inv_unidad_medida">
-      <End Role="inv_unidad_medida" EntitySet="inv_unidad_medida" />
-      <End Role="inv_producto" EntitySet="inv_producto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_inv_producto_stock_inv_producto" Association="DBModel.FK_inv_producto_stock_inv_producto">
-      <End Role="inv_producto" EntitySet="inv_producto" />
-      <End Role="inv_producto_stock" EntitySet="inv_producto_stock" />
-    </AssociationSet>
-    <AssociationSet Name="FK_inv_trans_detalle_inv_producto" Association="DBModel.FK_inv_trans_detalle_inv_producto">
-      <End Role="inv_producto" EntitySet="inv_producto" />
-      <End Role="inv_trans_detalle" EntitySet="inv_trans_detalle" />
-    </AssociationSet>
-    <AssociationSet Name="FK_inv_producto_stock_inv_ubicacion" Association="DBModel.FK_inv_producto_stock_inv_ubicacion">
-      <End Role="inv_ubicacion" EntitySet="inv_ubicacion" />
-      <End Role="inv_producto_stock" EntitySet="inv_producto_stock" />
-    </AssociationSet>
-    <AssociationSet Name="FK_inv_trans_detalle_inv_trans" Association="DBModel.FK_inv_trans_detalle_inv_trans">
-      <End Role="inv_trans" EntitySet="inv_trans" />
-      <End Role="inv_trans_detalle" EntitySet="inv_trans_detalle" />
-    </AssociationSet>
-    <AssociationSet Name="FK_inv_trans_detalle_inv_ubicacion" Association="DBModel.FK_inv_trans_detalle_inv_ubicacion">
-      <End Role="inv_ubicacion" EntitySet="inv_ubicacion" />
-      <End Role="inv_trans_detalle" EntitySet="inv_trans_detalle" />
-    </AssociationSet>
-    <EntitySet Name="adm_usuario" EntityType="DBModel.adm_usuario" />
-    <EntitySet Name="fac_precio" EntityType="DBModel.fac_precio" />
-    <EntitySet Name="fac_precio_detalle" EntityType="DBModel.fac_precio_detalle" />
-    <AssociationSet Name="FK_fac_precio_detalle_fac_precio" Association="DBModel.FK_fac_precio_detalle_fac_precio">
-      <End Role="fac_precio" EntitySet="fac_precio" />
-      <End Role="fac_precio_detalle" EntitySet="fac_precio_detalle" />
-    </AssociationSet>
-  </EntityContainer>
+<Schema Namespace="business_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="adm_usuario">
+    <Key>
+      <PropertyRef Name="usr_id" />
+    </Key>
+    <Property Name="usr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usr_usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="usr_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="usr_nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="usr_fecha_tran" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="usr_usuario_tran" Type="Int32" Nullable="false" />
+    <Property Name="usr_eliminado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="inv_ubicacion" Relationship="Self.FK_inv_ubicacion_adm_usuario" FromRole="adm_usuario" ToRole="inv_ubicacion" />
+  </EntityType>
   <EntityType Name="fac_cliente">
     <Key>
       <PropertyRef Name="cli_id" />
     </Key>
     <Property Name="cli_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="cli_nombres" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="cli_nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="cli_direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="cli_no_registro" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="cli_telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
@@ -70,6 +27,176 @@
     <Property Name="cli_usuario_tran" Type="Int32" Nullable="false" />
     <Property Name="cli_eliminado" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="fac_cxc">
+    <Key>
+      <PropertyRef Name="cxc_id" />
+    </Key>
+    <Property Name="cxc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cxc_fecha" Type="DateTime" Precision="0" />
+    <Property Name="cxc_factura" Type="Int32" />
+    <Property Name="cxc_cliente" Type="Int32" />
+    <Property Name="cxc_monto" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="cxc_dias_credito" Type="Int32" />
+    <Property Name="cxc_fecha_trans" Type="DateTime" Precision="3" />
+    <Property Name="cxc_usuario_trans" Type="Int32" />
+    <NavigationProperty Name="fac_cxc_detalle" Relationship="Self.FK_fac_cxc_detalle_fac_cxc" FromRole="fac_cxc" ToRole="fac_cxc_detalle" />
+  </EntityType>
+  <EntityType Name="fac_cxc_detalle">
+    <Key>
+      <PropertyRef Name="cde_id" />
+    </Key>
+    <Property Name="cde_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cde_cuenta" Type="Int32" />
+    <Property Name="cde_fecha" Type="DateTime" Precision="0" />
+    <Property Name="cde_abono" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="cde_no_documento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="cde_fecha_tran" Type="DateTime" Precision="3" />
+    <Property Name="cde_usuario_tran" Type="Int32" />
+    <NavigationProperty Name="fac_cxc" Relationship="Self.FK_fac_cxc_detalle_fac_cxc" FromRole="fac_cxc_detalle" ToRole="fac_cxc" />
+  </EntityType>
+  <EntityType Name="fac_factura">
+    <Key>
+      <PropertyRef Name="fac_id" />
+    </Key>
+    <Property Name="fac_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fac_serie" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fac_tipo_factura" Type="Int32" Nullable="false" />
+    <Property Name="fac_tipo_pago" Type="Int32" Nullable="false" />
+    <Property Name="fac_caja" Type="Int32" />
+    <Property Name="fac_fecha" Type="DateTime" Precision="0" />
+    <Property Name="fac_numero" Type="Int32" />
+    <Property Name="fac_no_registro" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="fac_cliente" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="fac_vendedor" Type="Int32" />
+    <Property Name="fac_monto" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="fac_impuesto" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="fac_total" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="fac_nota" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="fac_eliminado" Type="Boolean" />
+    <Property Name="fac_usuario_tran" Type="Int32" />
+    <Property Name="fac_fecha_tran" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="fac_factura_detalle" Relationship="Self.FK_fac_factura_detalle_fac_factura" FromRole="fac_factura" ToRole="fac_factura_detalle" />
+    <NavigationProperty Name="fac_tipo_factura1" Relationship="Self.FK_fac_factura_fac_tipo_factura" FromRole="fac_factura" ToRole="fac_tipo_factura" />
+    <NavigationProperty Name="fac_tipo_pago1" Relationship="Self.FK_fac_factura_fac_tipo_pago" FromRole="fac_factura" ToRole="fac_tipo_pago" />
+    <NavigationProperty Name="fac_vendedor1" Relationship="Self.FK_fac_factura_fac_vendedor" FromRole="fac_factura" ToRole="fac_vendedor" />
+  </EntityType>
+  <EntityType Name="fac_factura_detalle">
+    <Key>
+      <PropertyRef Name="fde_id" />
+    </Key>
+    <Property Name="fde_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fde_factura" Type="Int32" />
+    <Property Name="fde_producto" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="fde_descripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="fde_cantidad" Type="Int32" />
+    <Property Name="fde_unidad_medida" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="fde_precio_unitario" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="fde_descuento_porcen" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="fde_descuento_monto" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="fde_costo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="fde_usuario_tran" Type="Int32" />
+    <Property Name="fde_fecha_tran" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="fac_factura" Relationship="Self.FK_fac_factura_detalle_fac_factura" FromRole="fac_factura_detalle" ToRole="fac_factura" />
+  </EntityType>
+  <EntityType Name="fac_pedido">
+    <Key>
+      <PropertyRef Name="ped_id" />
+    </Key>
+    <Property Name="ped_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ped_numero" Type="Int32" />
+    <Property Name="ped_fecha" Type="DateTime" Precision="0" />
+    <Property Name="ped_cliente" Type="Int32" />
+    <Property Name="ped_vendedor" Type="Int32" />
+    <Property Name="ped_estado" Type="Int32" />
+    <Property Name="ped_factura" Type="Int32" />
+    <Property Name="ped_eliminado" Type="Boolean" />
+    <Property Name="ped_usuario_tran" Type="Int32" />
+    <Property Name="ped_fecha_tran" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="fac_pedido_detalle" Relationship="Self.FK_fac_pedido_detalle_fac_pedido" FromRole="fac_pedido" ToRole="fac_pedido_detalle" />
+    <NavigationProperty Name="fac_pedido_estado" Relationship="Self.FK_fac_pedido_fac_pedido_estado" FromRole="fac_pedido" ToRole="fac_pedido_estado" />
+  </EntityType>
+  <EntityType Name="fac_pedido_detalle">
+    <Key>
+      <PropertyRef Name="pde_id" />
+    </Key>
+    <Property Name="pde_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pde_pedido" Type="Int32" />
+    <Property Name="pde_cantidad" Type="Int32" />
+    <Property Name="pde_producto" Type="Int32" />
+    <Property Name="pde_precio_uni" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="pde_descuento_porcen" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="fde_descuento_monto" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="pde_costo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="pde_eliminado" Type="Boolean" />
+    <Property Name="pde_usuario_tran" Type="Int32" />
+    <Property Name="pde_fecha_tran" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="fac_pedido" Relationship="Self.FK_fac_pedido_detalle_fac_pedido" FromRole="fac_pedido_detalle" ToRole="fac_pedido" />
+  </EntityType>
+  <EntityType Name="fac_pedido_estado">
+    <Key>
+      <PropertyRef Name="pes_id" />
+    </Key>
+    <Property Name="pes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pes_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="fac_pedido" Relationship="Self.FK_fac_pedido_fac_pedido_estado" FromRole="fac_pedido_estado" ToRole="fac_pedido" />
+  </EntityType>
+  <EntityType Name="fac_precio">
+    <Key>
+      <PropertyRef Name="pre_id" />
+    </Key>
+    <Property Name="pre_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pre_descripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="pre_activo" Type="Boolean" />
+    <Property Name="pre_fecha_tran" Type="DateTime" Precision="3" />
+    <Property Name="pre_usuario_tran" Type="Int32" />
+    <NavigationProperty Name="fac_precio_detalle" Relationship="Self.FK_fac_precio_detalle_fac_precio" FromRole="fac_precio" ToRole="fac_precio_detalle" />
+  </EntityType>
+  <EntityType Name="fac_precio_detalle">
+    <Key>
+      <PropertyRef Name="pde_id" />
+    </Key>
+    <Property Name="pde_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pde_precio" Type="Int32" />
+    <Property Name="pde_producto" Type="Int32" />
+    <Property Name="pde_valor" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="pde_activo" Type="Boolean" />
+    <Property Name="pde_fecha_tran" Type="DateTime" Precision="3" />
+    <Property Name="pde_usuario_tran" Type="Int32" />
+    <NavigationProperty Name="fac_precio" Relationship="Self.FK_fac_precio_detalle_fac_precio" FromRole="fac_precio_detalle" ToRole="fac_precio" />
+  </EntityType>
+  <EntityType Name="fac_tipo_factura">
+    <Key>
+      <PropertyRef Name="tfa_id" />
+    </Key>
+    <Property Name="tfa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tfa_tipo_factura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tfa_eliminado" Type="Boolean" Nullable="false" />
+    <Property Name="tfa_usuario_tran" Type="Int32" />
+    <Property Name="tfa_fecha_tran" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="fac_factura" Relationship="Self.FK_fac_factura_fac_tipo_factura" FromRole="fac_tipo_factura" ToRole="fac_factura" />
+  </EntityType>
+  <EntityType Name="fac_tipo_pago">
+    <Key>
+      <PropertyRef Name="tpa_id" />
+    </Key>
+    <Property Name="tpa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tpa_tipo_pago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tpa_num_dias" Type="Int32" Nullable="false" />
+    <Property Name="tpa_eliminado" Type="Boolean" Nullable="false" />
+    <Property Name="tpa_usuario_tran" Type="Int32" />
+    <Property Name="tpa_fecha_tran" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="fac_factura" Relationship="Self.FK_fac_factura_fac_tipo_pago" FromRole="fac_tipo_pago" ToRole="fac_factura" />
+  </EntityType>
+  <EntityType Name="fac_vendedor">
+    <Key>
+      <PropertyRef Name="ven_id" />
+    </Key>
+    <Property Name="ven_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ven_codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ven_nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="ven_activo" Type="Boolean" />
+    <NavigationProperty Name="fac_factura" Relationship="Self.FK_fac_factura_fac_vendedor" FromRole="fac_vendedor" ToRole="fac_factura" />
+  </EntityType>
   <EntityType Name="inv_despacho">
     <Key>
       <PropertyRef Name="des_id" />
@@ -77,14 +204,14 @@
     <Property Name="des_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="des_factura" Type="Int32" Nullable="false" />
     <Property Name="des_fecha" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="des_cliente" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="des_cliente" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="des_direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="des_aplicado" Type="Boolean" />
     <Property Name="des_comentario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="des_fecha_tran" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="des_usuario_tran" Type="Int32" Nullable="false" />
     <Property Name="des_eliminado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="inv_despacho_detalle" Relationship="DBModel.FK_inv_despacho_detalle_inv_despacho" FromRole="inv_despacho" ToRole="inv_despacho_detalle" />
+    <NavigationProperty Name="inv_despacho_detalle" Relationship="Self.FK_inv_despacho_detalle_inv_despacho" FromRole="inv_despacho" ToRole="inv_despacho_detalle" />
   </EntityType>
   <EntityType Name="inv_despacho_detalle">
     <Key>
@@ -100,14 +227,14 @@
     <Property Name="ddt_fecha_tran" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ddt_usuario_tran" Type="Int32" Nullable="false" />
     <Property Name="ddt_eliminado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="inv_despacho" Relationship="DBModel.FK_inv_despacho_detalle_inv_despacho" FromRole="inv_despacho_detalle" ToRole="inv_despacho" />
+    <NavigationProperty Name="inv_despacho" Relationship="Self.FK_inv_despacho_detalle_inv_despacho" FromRole="inv_despacho_detalle" ToRole="inv_despacho" />
   </EntityType>
   <EntityType Name="inv_producto">
     <Key>
       <PropertyRef Name="pro_id" />
     </Key>
     <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="pro_codigo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="pro_codigo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="pro_descripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
     <Property Name="pro_unidad_medida" Type="Int32" />
     <Property Name="pro_tipo" Type="Int32" />
@@ -118,11 +245,11 @@
     <Property Name="pro_fecha_tran" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="pro_usuario_tran" Type="Int32" Nullable="false" />
     <Property Name="pro_eliminado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="inv_producto_tipo" Relationship="DBModel.FK_inv_producto_inv_producto_tipo" FromRole="inv_producto" ToRole="inv_producto_tipo" />
-    <NavigationProperty Name="inv_proveedor" Relationship="DBModel.FK_inv_producto_inv_proveedor" FromRole="inv_producto" ToRole="inv_proveedor" />
-    <NavigationProperty Name="inv_unidad_medida" Relationship="DBModel.FK_inv_producto_inv_unidad_medida" FromRole="inv_producto" ToRole="inv_unidad_medida" />
-    <NavigationProperty Name="inv_producto_stock" Relationship="DBModel.FK_inv_producto_stock_inv_producto" FromRole="inv_producto" ToRole="inv_producto_stock" />
-    <NavigationProperty Name="inv_trans_detalle" Relationship="DBModel.FK_inv_trans_detalle_inv_producto" FromRole="inv_producto" ToRole="inv_trans_detalle" />
+    <NavigationProperty Name="inv_producto_tipo" Relationship="Self.FK_inv_producto_inv_producto_tipo" FromRole="inv_producto" ToRole="inv_producto_tipo" />
+    <NavigationProperty Name="inv_proveedor" Relationship="Self.FK_inv_producto_inv_proveedor" FromRole="inv_producto" ToRole="inv_proveedor" />
+    <NavigationProperty Name="inv_unidad_medida" Relationship="Self.FK_inv_producto_inv_unidad_medida" FromRole="inv_producto" ToRole="inv_unidad_medida" />
+    <NavigationProperty Name="inv_producto_stock" Relationship="Self.FK_inv_producto_stock_inv_producto" FromRole="inv_producto" ToRole="inv_producto_stock" />
+    <NavigationProperty Name="inv_trans_detalle" Relationship="Self.FK_inv_trans_detalle_inv_producto" FromRole="inv_producto" ToRole="inv_trans_detalle" />
   </EntityType>
   <EntityType Name="inv_producto_stock">
     <Key>
@@ -132,12 +259,12 @@
     <Property Name="sto_cantidad" Type="Int32" Nullable="false" />
     <Property Name="sto_producto" Type="Int32" Nullable="false" />
     <Property Name="sto_ubicacion" Type="Int32" />
-    <Property Name="sto_costo" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="sto_costo" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
     <Property Name="sto_fecha_tran" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="sto_usuario_tran" Type="Int32" Nullable="false" />
     <Property Name="sto_eliminado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="inv_producto" Relationship="DBModel.FK_inv_producto_stock_inv_producto" FromRole="inv_producto_stock" ToRole="inv_producto" />
-    <NavigationProperty Name="inv_ubicacion" Relationship="DBModel.FK_inv_producto_stock_inv_ubicacion" FromRole="inv_producto_stock" ToRole="inv_ubicacion" />
+    <NavigationProperty Name="inv_producto" Relationship="Self.FK_inv_producto_stock_inv_producto" FromRole="inv_producto_stock" ToRole="inv_producto" />
+    <NavigationProperty Name="inv_ubicacion" Relationship="Self.FK_inv_producto_stock_inv_ubicacion" FromRole="inv_producto_stock" ToRole="inv_ubicacion" />
   </EntityType>
   <EntityType Name="inv_producto_tipo">
     <Key>
@@ -149,20 +276,20 @@
     <Property Name="pti_fecha_tran" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="pti_usuario_tran" Type="Int32" Nullable="false" />
     <Property Name="pti_eliminado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="inv_producto" Relationship="DBModel.FK_inv_producto_inv_producto_tipo" FromRole="inv_producto_tipo" ToRole="inv_producto" />
+    <NavigationProperty Name="inv_producto" Relationship="Self.FK_inv_producto_inv_producto_tipo" FromRole="inv_producto_tipo" ToRole="inv_producto" />
   </EntityType>
   <EntityType Name="inv_proveedor">
     <Key>
       <PropertyRef Name="prv_id" />
     </Key>
     <Property Name="prv_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="prv_nombre" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="prv_nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="prv_direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="prv_telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="prv_fecha_trans" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="prv_usuario_trans" Type="Int32" Nullable="false" />
     <Property Name="prv_eliminado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="inv_producto" Relationship="DBModel.FK_inv_producto_inv_proveedor" FromRole="inv_proveedor" ToRole="inv_producto" />
+    <NavigationProperty Name="inv_producto" Relationship="Self.FK_inv_producto_inv_proveedor" FromRole="inv_proveedor" ToRole="inv_producto" />
   </EntityType>
   <EntityType Name="inv_trans">
     <Key>
@@ -170,13 +297,13 @@
     </Key>
     <Property Name="tra_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tra_fecha" Type="DateTime" Precision="0" />
-    <Property Name="tra_usuario" Type="String" />
+    <Property Name="tra_usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="tra_tipo" Type="Int32" />
     <Property Name="tra_comentario" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="tra_fecha_trans" Type="DateTime" Precision="3" />
     <Property Name="tra_usuario_trans" Type="Int32" />
     <Property Name="tra_eliminado" Type="Boolean" />
-    <NavigationProperty Name="inv_trans_detalle" Relationship="DBModel.FK_inv_trans_detalle_inv_trans" FromRole="inv_trans" ToRole="inv_trans_detalle" />
+    <NavigationProperty Name="inv_trans_detalle" Relationship="Self.FK_inv_trans_detalle_inv_trans" FromRole="inv_trans" ToRole="inv_trans_detalle" />
   </EntityType>
   <EntityType Name="inv_trans_detalle">
     <Key>
@@ -192,23 +319,24 @@
     <Property Name="tde_fecha_trans" Type="DateTime" Precision="3" />
     <Property Name="tde_usuario_trans" Type="Int32" />
     <Property Name="tde_eliminado" Type="Boolean" />
-    <NavigationProperty Name="inv_producto" Relationship="DBModel.FK_inv_trans_detalle_inv_producto" FromRole="inv_trans_detalle" ToRole="inv_producto" />
-    <NavigationProperty Name="inv_trans" Relationship="DBModel.FK_inv_trans_detalle_inv_trans" FromRole="inv_trans_detalle" ToRole="inv_trans" />
-    <NavigationProperty Name="inv_ubicacion" Relationship="DBModel.FK_inv_trans_detalle_inv_ubicacion" FromRole="inv_trans_detalle" ToRole="inv_ubicacion" />
+    <NavigationProperty Name="inv_producto" Relationship="Self.FK_inv_trans_detalle_inv_producto" FromRole="inv_trans_detalle" ToRole="inv_producto" />
+    <NavigationProperty Name="inv_trans" Relationship="Self.FK_inv_trans_detalle_inv_trans" FromRole="inv_trans_detalle" ToRole="inv_trans" />
+    <NavigationProperty Name="inv_ubicacion" Relationship="Self.FK_inv_trans_detalle_inv_ubicacion" FromRole="inv_trans_detalle" ToRole="inv_ubicacion" />
   </EntityType>
   <EntityType Name="inv_ubicacion">
     <Key>
       <PropertyRef Name="ubi_id" />
     </Key>
     <Property Name="ubi_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ubi_codigo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ubi_codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ubi_descripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
     <Property Name="ubi_activo" Type="Boolean" Nullable="false" />
     <Property Name="ubi_fecha_tran" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ubi_usuario_tran" Type="Int32" Nullable="false" />
     <Property Name="ubi_eliminado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="inv_producto_stock" Relationship="DBModel.FK_inv_producto_stock_inv_ubicacion" FromRole="inv_ubicacion" ToRole="inv_producto_stock" />
-    <NavigationProperty Name="inv_trans_detalle" Relationship="DBModel.FK_inv_trans_detalle_inv_ubicacion" FromRole="inv_ubicacion" ToRole="inv_trans_detalle" />
+    <NavigationProperty Name="adm_usuario" Relationship="Self.FK_inv_ubicacion_adm_usuario" FromRole="inv_ubicacion" ToRole="adm_usuario" />
+    <NavigationProperty Name="inv_producto_stock" Relationship="Self.FK_inv_producto_stock_inv_ubicacion" FromRole="inv_ubicacion" ToRole="inv_producto_stock" />
+    <NavigationProperty Name="inv_trans_detalle" Relationship="Self.FK_inv_trans_detalle_inv_ubicacion" FromRole="inv_ubicacion" ToRole="inv_trans_detalle" />
   </EntityType>
   <EntityType Name="inv_unidad_medida">
     <Key>
@@ -219,11 +347,119 @@
     <Property Name="uni_fecha_tran" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ubi_usuario_tran" Type="Int32" Nullable="false" />
     <Property Name="ubi_eliminado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="inv_producto" Relationship="DBModel.FK_inv_producto_inv_unidad_medida" FromRole="inv_unidad_medida" ToRole="inv_producto" />
+    <NavigationProperty Name="inv_producto" Relationship="Self.FK_inv_producto_inv_unidad_medida" FromRole="inv_unidad_medida" ToRole="inv_producto" />
   </EntityType>
+  <Association Name="FK_inv_ubicacion_adm_usuario">
+    <End Role="adm_usuario" Type="Self.adm_usuario" Multiplicity="1" />
+    <End Role="inv_ubicacion" Type="Self.inv_ubicacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="adm_usuario">
+        <PropertyRef Name="usr_id" />
+      </Principal>
+      <Dependent Role="inv_ubicacion">
+        <PropertyRef Name="ubi_usuario_tran" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fac_cxc_detalle_fac_cxc">
+    <End Role="fac_cxc" Type="Self.fac_cxc" Multiplicity="0..1" />
+    <End Role="fac_cxc_detalle" Type="Self.fac_cxc_detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fac_cxc">
+        <PropertyRef Name="cxc_id" />
+      </Principal>
+      <Dependent Role="fac_cxc_detalle">
+        <PropertyRef Name="cde_cuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fac_factura_detalle_fac_factura">
+    <End Role="fac_factura" Type="Self.fac_factura" Multiplicity="0..1" />
+    <End Role="fac_factura_detalle" Type="Self.fac_factura_detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fac_factura">
+        <PropertyRef Name="fac_id" />
+      </Principal>
+      <Dependent Role="fac_factura_detalle">
+        <PropertyRef Name="fde_factura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fac_factura_fac_tipo_factura">
+    <End Role="fac_tipo_factura" Type="Self.fac_tipo_factura" Multiplicity="1" />
+    <End Role="fac_factura" Type="Self.fac_factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fac_tipo_factura">
+        <PropertyRef Name="tfa_id" />
+      </Principal>
+      <Dependent Role="fac_factura">
+        <PropertyRef Name="fac_tipo_factura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fac_factura_fac_tipo_pago">
+    <End Role="fac_tipo_pago" Type="Self.fac_tipo_pago" Multiplicity="1" />
+    <End Role="fac_factura" Type="Self.fac_factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fac_tipo_pago">
+        <PropertyRef Name="tpa_id" />
+      </Principal>
+      <Dependent Role="fac_factura">
+        <PropertyRef Name="fac_tipo_pago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fac_factura_fac_vendedor">
+    <End Role="fac_vendedor" Type="Self.fac_vendedor" Multiplicity="0..1" />
+    <End Role="fac_factura" Type="Self.fac_factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fac_vendedor">
+        <PropertyRef Name="ven_id" />
+      </Principal>
+      <Dependent Role="fac_factura">
+        <PropertyRef Name="fac_vendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fac_pedido_detalle_fac_pedido">
+    <End Role="fac_pedido" Type="Self.fac_pedido" Multiplicity="0..1" />
+    <End Role="fac_pedido_detalle" Type="Self.fac_pedido_detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fac_pedido">
+        <PropertyRef Name="ped_id" />
+      </Principal>
+      <Dependent Role="fac_pedido_detalle">
+        <PropertyRef Name="pde_pedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fac_pedido_fac_pedido_estado">
+    <End Role="fac_pedido_estado" Type="Self.fac_pedido_estado" Multiplicity="0..1" />
+    <End Role="fac_pedido" Type="Self.fac_pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fac_pedido_estado">
+        <PropertyRef Name="pes_id" />
+      </Principal>
+      <Dependent Role="fac_pedido">
+        <PropertyRef Name="ped_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fac_precio_detalle_fac_precio">
+    <End Role="fac_precio" Type="Self.fac_precio" Multiplicity="0..1" />
+    <End Role="fac_precio_detalle" Type="Self.fac_precio_detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fac_precio">
+        <PropertyRef Name="pre_id" />
+      </Principal>
+      <Dependent Role="fac_precio_detalle">
+        <PropertyRef Name="pde_precio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_inv_despacho_detalle_inv_despacho">
-    <End Type="DBModel.inv_despacho" Role="inv_despacho" Multiplicity="1" />
-    <End Type="DBModel.inv_despacho_detalle" Role="inv_despacho_detalle" Multiplicity="*" />
+    <End Role="inv_despacho" Type="Self.inv_despacho" Multiplicity="1" />
+    <End Role="inv_despacho_detalle" Type="Self.inv_despacho_detalle" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="inv_despacho">
         <PropertyRef Name="des_id" />
@@ -234,8 +470,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_inv_producto_inv_producto_tipo">
-    <End Type="DBModel.inv_producto_tipo" Role="inv_producto_tipo" Multiplicity="0..1" />
-    <End Type="DBModel.inv_producto" Role="inv_producto" Multiplicity="*" />
+    <End Role="inv_producto_tipo" Type="Self.inv_producto_tipo" Multiplicity="0..1" />
+    <End Role="inv_producto" Type="Self.inv_producto" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="inv_producto_tipo">
         <PropertyRef Name="pti_id" />
@@ -246,8 +482,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_inv_producto_inv_proveedor">
-    <End Type="DBModel.inv_proveedor" Role="inv_proveedor" Multiplicity="0..1" />
-    <End Type="DBModel.inv_producto" Role="inv_producto" Multiplicity="*" />
+    <End Role="inv_proveedor" Type="Self.inv_proveedor" Multiplicity="0..1" />
+    <End Role="inv_producto" Type="Self.inv_producto" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="inv_proveedor">
         <PropertyRef Name="prv_id" />
@@ -258,8 +494,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_inv_producto_inv_unidad_medida">
-    <End Type="DBModel.inv_unidad_medida" Role="inv_unidad_medida" Multiplicity="0..1" />
-    <End Type="DBModel.inv_producto" Role="inv_producto" Multiplicity="*" />
+    <End Role="inv_unidad_medida" Type="Self.inv_unidad_medida" Multiplicity="0..1" />
+    <End Role="inv_producto" Type="Self.inv_producto" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="inv_unidad_medida">
         <PropertyRef Name="uni_id" />
@@ -270,8 +506,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_inv_producto_stock_inv_producto">
-    <End Type="DBModel.inv_producto" Role="inv_producto" Multiplicity="1" />
-    <End Type="DBModel.inv_producto_stock" Role="inv_producto_stock" Multiplicity="*" />
+    <End Role="inv_producto" Type="Self.inv_producto" Multiplicity="1" />
+    <End Role="inv_producto_stock" Type="Self.inv_producto_stock" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="inv_producto">
         <PropertyRef Name="pro_id" />
@@ -282,8 +518,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_inv_trans_detalle_inv_producto">
-    <End Type="DBModel.inv_producto" Role="inv_producto" Multiplicity="0..1" />
-    <End Type="DBModel.inv_trans_detalle" Role="inv_trans_detalle" Multiplicity="*" />
+    <End Role="inv_producto" Type="Self.inv_producto" Multiplicity="0..1" />
+    <End Role="inv_trans_detalle" Type="Self.inv_trans_detalle" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="inv_producto">
         <PropertyRef Name="pro_id" />
@@ -294,8 +530,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_inv_producto_stock_inv_ubicacion">
-    <End Type="DBModel.inv_ubicacion" Role="inv_ubicacion" Multiplicity="0..1" />
-    <End Type="DBModel.inv_producto_stock" Role="inv_producto_stock" Multiplicity="*" />
+    <End Role="inv_ubicacion" Type="Self.inv_ubicacion" Multiplicity="0..1" />
+    <End Role="inv_producto_stock" Type="Self.inv_producto_stock" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="inv_ubicacion">
         <PropertyRef Name="ubi_id" />
@@ -306,8 +542,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_inv_trans_detalle_inv_trans">
-    <End Type="DBModel.inv_trans" Role="inv_trans" Multiplicity="1" />
-    <End Type="DBModel.inv_trans_detalle" Role="inv_trans_detalle" Multiplicity="*" />
+    <End Role="inv_trans" Type="Self.inv_trans" Multiplicity="1" />
+    <End Role="inv_trans_detalle" Type="Self.inv_trans_detalle" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="inv_trans">
         <PropertyRef Name="tra_id" />
@@ -318,8 +554,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_inv_trans_detalle_inv_ubicacion">
-    <End Type="DBModel.inv_ubicacion" Role="inv_ubicacion" Multiplicity="0..1" />
-    <End Type="DBModel.inv_trans_detalle" Role="inv_trans_detalle" Multiplicity="*" />
+    <End Role="inv_ubicacion" Type="Self.inv_ubicacion" Multiplicity="0..1" />
+    <End Role="inv_trans_detalle" Type="Self.inv_trans_detalle" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="inv_ubicacion">
         <PropertyRef Name="ubi_id" />
@@ -329,52 +565,102 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="adm_usuario">
-    <Key>
-      <PropertyRef Name="usr_id" />
-    </Key>
-    <Property Name="usr_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="usr_usuario" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="usr_password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="usr_nombre" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="usr_fecha_tran" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="usr_usuario_tran" Type="Int32" Nullable="false" />
-    <Property Name="usr_eliminado" Type="Boolean" Nullable="false" />
-  </EntityType>
-  <EntityType Name="fac_precio">
-    <Key>
-      <PropertyRef Name="pre_id" />
-    </Key>
-    <Property Name="pre_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="pre_descripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
-    <Property Name="pre_activo" Type="Boolean" />
-    <Property Name="pre_fecha_tran" Type="DateTime" Precision="3" />
-    <Property Name="pre_usuario_tran" Type="Int32" />
-    <NavigationProperty Name="fac_precio_detalle" Relationship="DBModel.FK_fac_precio_detalle_fac_precio" FromRole="fac_precio" ToRole="fac_precio_detalle" />
-  </EntityType>
-  <EntityType Name="fac_precio_detalle">
-    <Key>
-      <PropertyRef Name="pde_id" />
-    </Key>
-    <Property Name="pde_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="pde_precio" Type="Int32" />
-    <Property Name="pde_producto" Type="Int32" />
-    <Property Name="pde_valor" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="pde_activo" Type="Boolean" />
-    <Property Name="pde_fecha_tran" Type="DateTime" Precision="3" />
-    <Property Name="pde_usuario_tran" Type="Int32" />
-    <NavigationProperty Name="fac_precio" Relationship="DBModel.FK_fac_precio_detalle_fac_precio" FromRole="fac_precio_detalle" ToRole="fac_precio" />
-  </EntityType>
-  <Association Name="FK_fac_precio_detalle_fac_precio">
-    <End Type="DBModel.fac_precio" Role="fac_precio" Multiplicity="0..1" />
-    <End Type="DBModel.fac_precio_detalle" Role="fac_precio_detalle" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="fac_precio">
-        <PropertyRef Name="pre_id" />
-      </Principal>
-      <Dependent Role="fac_precio_detalle">
-        <PropertyRef Name="pde_precio" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityContainer Name="business_dbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="adm_usuario" EntityType="Self.adm_usuario" />
+    <EntitySet Name="fac_cliente" EntityType="Self.fac_cliente" />
+    <EntitySet Name="fac_cxc" EntityType="Self.fac_cxc" />
+    <EntitySet Name="fac_cxc_detalle" EntityType="Self.fac_cxc_detalle" />
+    <EntitySet Name="fac_factura" EntityType="Self.fac_factura" />
+    <EntitySet Name="fac_factura_detalle" EntityType="Self.fac_factura_detalle" />
+    <EntitySet Name="fac_pedido" EntityType="Self.fac_pedido" />
+    <EntitySet Name="fac_pedido_detalle" EntityType="Self.fac_pedido_detalle" />
+    <EntitySet Name="fac_pedido_estado" EntityType="Self.fac_pedido_estado" />
+    <EntitySet Name="fac_precio" EntityType="Self.fac_precio" />
+    <EntitySet Name="fac_precio_detalle" EntityType="Self.fac_precio_detalle" />
+    <EntitySet Name="fac_tipo_factura" EntityType="Self.fac_tipo_factura" />
+    <EntitySet Name="fac_tipo_pago" EntityType="Self.fac_tipo_pago" />
+    <EntitySet Name="fac_vendedor" EntityType="Self.fac_vendedor" />
+    <EntitySet Name="inv_despacho" EntityType="Self.inv_despacho" />
+    <EntitySet Name="inv_despacho_detalle" EntityType="Self.inv_despacho_detalle" />
+    <EntitySet Name="inv_producto" EntityType="Self.inv_producto" />
+    <EntitySet Name="inv_producto_stock" EntityType="Self.inv_producto_stock" />
+    <EntitySet Name="inv_producto_tipo" EntityType="Self.inv_producto_tipo" />
+    <EntitySet Name="inv_proveedor" EntityType="Self.inv_proveedor" />
+    <EntitySet Name="inv_trans" EntityType="Self.inv_trans" />
+    <EntitySet Name="inv_trans_detalle" EntityType="Self.inv_trans_detalle" />
+    <EntitySet Name="inv_ubicacion" EntityType="Self.inv_ubicacion" />
+    <EntitySet Name="inv_unidad_medida" EntityType="Self.inv_unidad_medida" />
+    <AssociationSet Name="FK_inv_ubicacion_adm_usuario" Association="Self.FK_inv_ubicacion_adm_usuario">
+      <End Role="adm_usuario" EntitySet="adm_usuario" />
+      <End Role="inv_ubicacion" EntitySet="inv_ubicacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fac_cxc_detalle_fac_cxc" Association="Self.FK_fac_cxc_detalle_fac_cxc">
+      <End Role="fac_cxc" EntitySet="fac_cxc" />
+      <End Role="fac_cxc_detalle" EntitySet="fac_cxc_detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fac_factura_detalle_fac_factura" Association="Self.FK_fac_factura_detalle_fac_factura">
+      <End Role="fac_factura" EntitySet="fac_factura" />
+      <End Role="fac_factura_detalle" EntitySet="fac_factura_detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fac_factura_fac_tipo_factura" Association="Self.FK_fac_factura_fac_tipo_factura">
+      <End Role="fac_tipo_factura" EntitySet="fac_tipo_factura" />
+      <End Role="fac_factura" EntitySet="fac_factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fac_factura_fac_tipo_pago" Association="Self.FK_fac_factura_fac_tipo_pago">
+      <End Role="fac_tipo_pago" EntitySet="fac_tipo_pago" />
+      <End Role="fac_factura" EntitySet="fac_factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fac_factura_fac_vendedor" Association="Self.FK_fac_factura_fac_vendedor">
+      <End Role="fac_vendedor" EntitySet="fac_vendedor" />
+      <End Role="fac_factura" EntitySet="fac_factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fac_pedido_detalle_fac_pedido" Association="Self.FK_fac_pedido_detalle_fac_pedido">
+      <End Role="fac_pedido" EntitySet="fac_pedido" />
+      <End Role="fac_pedido_detalle" EntitySet="fac_pedido_detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fac_pedido_fac_pedido_estado" Association="Self.FK_fac_pedido_fac_pedido_estado">
+      <End Role="fac_pedido_estado" EntitySet="fac_pedido_estado" />
+      <End Role="fac_pedido" EntitySet="fac_pedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fac_precio_detalle_fac_precio" Association="Self.FK_fac_precio_detalle_fac_precio">
+      <End Role="fac_precio" EntitySet="fac_precio" />
+      <End Role="fac_precio_detalle" EntitySet="fac_precio_detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inv_despacho_detalle_inv_despacho" Association="Self.FK_inv_despacho_detalle_inv_despacho">
+      <End Role="inv_despacho" EntitySet="inv_despacho" />
+      <End Role="inv_despacho_detalle" EntitySet="inv_despacho_detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inv_producto_inv_producto_tipo" Association="Self.FK_inv_producto_inv_producto_tipo">
+      <End Role="inv_producto_tipo" EntitySet="inv_producto_tipo" />
+      <End Role="inv_producto" EntitySet="inv_producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inv_producto_inv_proveedor" Association="Self.FK_inv_producto_inv_proveedor">
+      <End Role="inv_proveedor" EntitySet="inv_proveedor" />
+      <End Role="inv_producto" EntitySet="inv_producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inv_producto_inv_unidad_medida" Association="Self.FK_inv_producto_inv_unidad_medida">
+      <End Role="inv_unidad_medida" EntitySet="inv_unidad_medida" />
+      <End Role="inv_producto" EntitySet="inv_producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inv_producto_stock_inv_producto" Association="Self.FK_inv_producto_stock_inv_producto">
+      <End Role="inv_producto" EntitySet="inv_producto" />
+      <End Role="inv_producto_stock" EntitySet="inv_producto_stock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inv_trans_detalle_inv_producto" Association="Self.FK_inv_trans_detalle_inv_producto">
+      <End Role="inv_producto" EntitySet="inv_producto" />
+      <End Role="inv_trans_detalle" EntitySet="inv_trans_detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inv_producto_stock_inv_ubicacion" Association="Self.FK_inv_producto_stock_inv_ubicacion">
+      <End Role="inv_ubicacion" EntitySet="inv_ubicacion" />
+      <End Role="inv_producto_stock" EntitySet="inv_producto_stock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inv_trans_detalle_inv_trans" Association="Self.FK_inv_trans_detalle_inv_trans">
+      <End Role="inv_trans" EntitySet="inv_trans" />
+      <End Role="inv_trans_detalle" EntitySet="inv_trans_detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inv_trans_detalle_inv_ubicacion" Association="Self.FK_inv_trans_detalle_inv_ubicacion">
+      <End Role="inv_ubicacion" EntitySet="inv_ubicacion" />
+      <End Role="inv_trans_detalle" EntitySet="inv_trans_detalle" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

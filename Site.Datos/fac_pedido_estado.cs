@@ -12,23 +12,18 @@ namespace Site.Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class adm_usuario
+    public partial class fac_pedido_estado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public adm_usuario()
+        public fac_pedido_estado()
         {
-            this.inv_ubicacion = new HashSet<inv_ubicacion>();
+            this.fac_pedido = new HashSet<fac_pedido>();
         }
     
-        public int usr_id { get; set; }
-        public string usr_usuario { get; set; }
-        public string usr_password { get; set; }
-        public string usr_nombre { get; set; }
-        public System.DateTime usr_fecha_tran { get; set; }
-        public int usr_usuario_tran { get; set; }
-        public bool usr_eliminado { get; set; }
+        public int pes_id { get; set; }
+        public string pes_estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<inv_ubicacion> inv_ubicacion { get; set; }
+        public virtual ICollection<fac_pedido> fac_pedido { get; set; }
     }
 }

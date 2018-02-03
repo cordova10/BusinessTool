@@ -12,23 +12,24 @@ namespace Site.Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class adm_usuario
+    public partial class fac_cxc
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public adm_usuario()
+        public fac_cxc()
         {
-            this.inv_ubicacion = new HashSet<inv_ubicacion>();
+            this.fac_cxc_detalle = new HashSet<fac_cxc_detalle>();
         }
     
-        public int usr_id { get; set; }
-        public string usr_usuario { get; set; }
-        public string usr_password { get; set; }
-        public string usr_nombre { get; set; }
-        public System.DateTime usr_fecha_tran { get; set; }
-        public int usr_usuario_tran { get; set; }
-        public bool usr_eliminado { get; set; }
+        public int cxc_id { get; set; }
+        public Nullable<System.DateTime> cxc_fecha { get; set; }
+        public Nullable<int> cxc_factura { get; set; }
+        public Nullable<int> cxc_cliente { get; set; }
+        public Nullable<decimal> cxc_monto { get; set; }
+        public Nullable<int> cxc_dias_credito { get; set; }
+        public Nullable<System.DateTime> cxc_fecha_trans { get; set; }
+        public Nullable<int> cxc_usuario_trans { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<inv_ubicacion> inv_ubicacion { get; set; }
+        public virtual ICollection<fac_cxc_detalle> fac_cxc_detalle { get; set; }
     }
 }
