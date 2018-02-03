@@ -37,3 +37,4 @@ C:\Users\HP\Source\Repos\BusinessTool\Site.Datos\bin\Debug\EntityFramework.xml
 C:\Users\HP\Source\Repos\BusinessTool\Site.Datos\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\HP\Source\Repos\BusinessTool\Site.Datos\obj\Debug\Site.Datos.dll
 C:\Users\HP\Source\Repos\BusinessTool\Site.Datos\obj\Debug\Site.Datos.pdb
+C:\Users\HP\Source\Repos\BusinessTool\Site.Datos\obj\Debug\Site.Datos.csprojResolveAssemblyReference.cache
