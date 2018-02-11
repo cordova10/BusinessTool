@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Site.Datos;
 using Site.Models;
 using Site.Helpers;
+using OfficeOpenXml;
 
 namespace Site.Controllers
 {
@@ -207,6 +208,21 @@ namespace Site.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public ActionResult LoadIn(HttpPostedFileBase file)
+        {
+            if (file == null) return Json(new { status = "error", msg = "Se necesita cargar un archivo de tipo EXCEL" });
+            string ex = System.IO.Path.GetExtension(file.FileName).ToLower();
+            if (!(ex == ".xls" || ex==".xlsx")) return Json(new { status = "error", msg = "Se necesita cargar un archivo de tipo EXCEL" });
+
+            ExcelPackage excel = new ExcelPackage(file.InputStream);
+            ExcelWorksheet sheet = excel.Workbook.Worksheets[0];
+
+           
+
+            return Json(new { status = "ok" });
         }
     }
 }
