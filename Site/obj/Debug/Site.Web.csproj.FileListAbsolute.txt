@@ -140,3 +140,5 @@ C:\Users\HP\Source\Repos\BusinessTool\Site\bin\Microsoft.Owin.Security.Microsoft
 C:\Users\HP\Source\Repos\BusinessTool\Site\obj\Debug\Site.Web.csprojResolveAssemblyReference.cache
 C:\Users\HP\Source\Repos\BusinessTool\Site\obj\Debug\Site.dll
 C:\Users\HP\Source\Repos\BusinessTool\Site\obj\Debug\Site.pdb
+C:\Users\HP\Source\Repos\BusinessTool\Site\bin\EPPlus.dll
+C:\Users\HP\Source\Repos\BusinessTool\Site\bin\EPPlus.xml

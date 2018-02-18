@@ -15,10 +15,11 @@
             <!-- The file input field used as target for the file upload widget -->
 
             <input id="fileupload" type="file" name="file" multiple>
-
+            <input type="hidden" name="id_trans" value="@ViewBag.IdTrans" />
         </span>
         <img src="@Url.Content("~/img/ajax-loader.gif")" width="30" id="dev-img-loader"  style="display:none;" />
     </form>
+    <a class="btn" id="dev-errores" style="display:none;" target="_blank">Errores</a>
 </div>
 
 <p>&nbsp;</p>
@@ -45,6 +46,7 @@
             if ($f.val() != '') {
                 
                 $l.show();
+                $('#dev-errores').hide();
                 var formData = new FormData(document.getElementById("formuploadajax"));
                 $.ajax({
                     url: $('#formuploadajax').attr('action'),
@@ -59,10 +61,17 @@
                         if (res.status == 'error') {
                             alert(res.msg);
                         } else { //ok
-
+                            if (res.link_error != '') {
+                                alert('Hay errores al procesar');
+                                $('#dev-errores').show();
+                                $('#dev-errores').attr('href',res.link_error);
+                            }
+                           
+                            $('#ajaxDetails').html(res.html);
                         }
                     },
                     error: function () {
+                        $l.hide();
                         alert('error en el servidor');
                     }
                 })
