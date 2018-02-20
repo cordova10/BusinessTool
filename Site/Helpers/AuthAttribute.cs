@@ -17,7 +17,8 @@ namespace Site.Helpers
             Usuario usr = filterContext.HttpContext.Session["usr"] as Usuario;
             if (usr == null)
             {
-                FormsAuthentication.SignOut();               
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
             }
 
             base.OnAuthorization(filterContext);
